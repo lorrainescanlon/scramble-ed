@@ -3,6 +3,7 @@ import random
 import array
 from google.oauth2.service_account import Credentials
 from os import system, name
+from random import shuffle
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -125,19 +126,14 @@ def random_title(titles_to_use):
     return random.choice(titles_to_use)
 
 
-"""def scramble_titles(titles_to_scramble):
-    
-    Shuffle items in the titles_to_scramble array
-
-
-    scrambled_songs = (titles_to_scramble)
-    random.shuffle(scrambled_songs)
-
-    return scrambled_songs
+def scramble_title(title):
+    """     
+    Shuffle title
     """
-
-
-
+    (title) = list(title)
+    shuffle(title)
+    return ''.join(title)
+ 
 
 def clear():
     """
@@ -160,11 +156,13 @@ print(level_choice)
 titles_to_use = load_words(level_choice)
 print(titles_to_use)
 
-#scrambled_songs = scramble_titles(titles_to_scramble)
-#print(scrambled_songs)
-
 chosen_title = random_title(titles_to_use)
 print(chosen_title)
+
+scrambled_title = scramble_title(chosen_title)
+print(scrambled_title)
+
+
 
 
 
