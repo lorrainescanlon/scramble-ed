@@ -13,10 +13,10 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('edsongs')
 
-songs = SHEET.worksheet('songs')
-data = songs.get_all_values()
-scores = SHEET.worksheet('scores')
-score_data = scores.get_all_values()
+#songs = SHEET.worksheet('songs')
+#data = songs.get_all_values()
+#scores = SHEET.worksheet('scores')
+#score_data = scores.get_all_values()
 
 """
 class User(object):
@@ -65,6 +65,7 @@ def validate_username(name):
         return False
     return True
 
+
 def select_level(username):
     """
     Prompts the user to enter a level of difficulty.
@@ -102,6 +103,26 @@ def validate_choice(choice):
         return False
     return True
 
+def load_words(choice):
+    """
+    Load songs list into an array according to level choice
+    """
+
+    titles_to_scramble = []
+    songs = SHEET.worksheet('songs')
+    
+    if choice == "1":
+        titles_to_scramble = songs.col_values(1)
+        print(titles_to_scramble)
+    elif choice == "2":
+        titles_to_scramble = songs.col_values(2)
+        print(titles_to_scramble)
+    elif choice == "3":
+        titles_to_scramble = songs.col_value(3)
+        print(titles_to_scramble)
+    return titles_to_scramble
+
+
 
 def clear():
     """
@@ -118,7 +139,9 @@ def clear():
     
 
 username = get_username()
-select_level(username)
+level_choice = select_level(username)
+print(level_choice)
+load_words(level_choice)
 
 #print(score_data)
 
