@@ -1,5 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
+from os import system, name
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -8,13 +9,25 @@ SCOPE = [
     ]
 
 CREDS = Credentials.from_service_account_file('creds.json')
-SCOPED_CREDS = CREDS.with_scopes (SCOPE)
+SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('edsongs')
 
 songs = SHEET.worksheet('songs')
-
 data = songs.get_all_values()
+scores = SHEET.worksheet('scores')
+score_data = scores.get_all_values()
+
+"""
+class User(object):
+    name = ""
+    score = 0
+
+    def __init__(self, name, score):
+        self.name = name
+        self.score = score
+
+"""
 
 
 def get_username():
@@ -35,6 +48,8 @@ def get_username():
             break
     return username
 
+
+
 def validate_username(name):
     """
     Checks that the username entered does not exceed 12 characters
@@ -50,4 +65,61 @@ def validate_username(name):
         return False
     return True
 
-get_username()
+def select_level(username):
+    """
+    Prompts the user to enter a level of difficulty.
+    1. Consists of 1 word song titles.
+    2. Consists of 2 word song titles.
+    3. Consists of 3 word song titles.
+    """
+    while True:
+        print(f"Lets get started {username}\n")
+        print("Please choose a level of difficulty: 1, 2, or 3\n")
+        print("1 - 1 Word Song Titles\n")
+        print("2 - 2 Word Song Titles\n")
+        print("3 - 3 Word Song Titles\n")
+
+        level_choice = ""
+        level_choice = input("Enter 1, 2 or 3: \n")
+
+        if validate_choice(level_choice):
+            print("Choice is valid")
+            break
+    return level_choice
+
+def validate_choice(choice):
+    """
+    Checks that the level entered is 1, 2 or 3
+    """
+    try:
+        if choice not in ("1", "2", "3"):
+            raise ValueError(
+                "Incorrect level entered"
+            )
+
+    except ValueError as e:
+        print(f"Invalid data: {e}, please try again.\n")
+        return False
+    return True
+
+
+def clear():
+    """
+    Clears console screen
+    """
+
+    #to clear windows machines
+    if name == 'nt':
+        _ = system('cls')
+    
+    #to clear mac and linux machines
+    else:
+        _ = system('clear')
+    
+
+username = get_username()
+select_level(username)
+
+#print(score_data)
+
+
