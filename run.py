@@ -1,4 +1,6 @@
 import gspread
+import random
+import array
 from google.oauth2.service_account import Credentials
 from os import system, name
 
@@ -118,9 +120,21 @@ def load_words(choice):
         titles_to_scramble = songs.col_values(2)
         print(titles_to_scramble)
     elif choice == "3":
-        titles_to_scramble = songs.col_value(3)
+        titles_to_scramble = songs.col_values(3)
         print(titles_to_scramble)
     return titles_to_scramble
+
+
+def scramble_titles(titles_to_scramble):
+    """
+    Shuffle items in the titles_to_scramble array
+    """
+
+    scrambled_songs = (titles_to_scramble)
+    random.shuffle(scrambled_songs)
+
+    print(scrambled_songs)
+    return scrambled_songs
 
 
 
@@ -140,9 +154,13 @@ def clear():
 
 username = get_username()
 level_choice = select_level(username)
-print(level_choice)
-load_words(level_choice)
 
-#print(score_data)
+titles_to_scramble = load_words(level_choice)
+
+scramble_titles(titles_to_scramble)
+
+
+
+
 
 
