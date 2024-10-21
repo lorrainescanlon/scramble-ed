@@ -110,33 +110,33 @@ def load_words(choice):
     Load songs list into an array according to level choice
     """
 
-    titles_to_scramble = []
+    titles_to_use = []
     songs = SHEET.worksheet('songs')
     
     if choice == "1":
-        titles_to_scramble = songs.col_values(1)
-        print(titles_to_scramble)
+        titles_to_use = songs.col_values(1)
     elif choice == "2":
-        titles_to_scramble = songs.col_values(2)
-        print(titles_to_scramble)
+        titles_to_use = songs.col_values(2)
     elif choice == "3":
-        titles_to_scramble = songs.col_values(3)
-        print(titles_to_scramble)
-    return titles_to_scramble
+        titles_to_use = songs.col_values(3)
+    return titles_to_use
+
+def random_title(titles_to_use):
+    return random.choice(titles_to_use)
 
 
-def scramble_titles(titles_to_scramble):
-    """
+"""def scramble_titles(titles_to_scramble):
+    
     Shuffle items in the titles_to_scramble array
-    """
+
 
     scrambled_songs = (titles_to_scramble)
     random.shuffle(scrambled_songs)
 
     return scrambled_songs
+    """
 
-def random_title(scrambled_songs):
-    return random.choice(scrambled_songs)
+
 
 
 def clear():
@@ -157,13 +157,13 @@ username = get_username()
 level_choice = select_level(username)
 print(level_choice)
 
-titles_to_scramble = load_words(level_choice)
-print(titles_to_scramble)
+titles_to_use = load_words(level_choice)
+print(titles_to_use)
 
-scrambled_songs = scramble_titles(titles_to_scramble)
-print(scrambled_songs)
+#scrambled_songs = scramble_titles(titles_to_scramble)
+#print(scrambled_songs)
 
-chosen_title = random_title(scrambled_songs)
+chosen_title = random_title(titles_to_use)
 print(chosen_title)
 
 
