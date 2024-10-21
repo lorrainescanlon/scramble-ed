@@ -133,9 +133,10 @@ def scramble_titles(titles_to_scramble):
     scrambled_songs = (titles_to_scramble)
     random.shuffle(scrambled_songs)
 
-    print(scrambled_songs)
     return scrambled_songs
 
+def random_title(scrambled_songs):
+    return random.choice(scrambled_songs)
 
 
 def clear():
@@ -154,10 +155,17 @@ def clear():
 
 username = get_username()
 level_choice = select_level(username)
+print(level_choice)
 
 titles_to_scramble = load_words(level_choice)
+print(titles_to_scramble)
 
-scramble_titles(titles_to_scramble)
+scrambled_songs = scramble_titles(titles_to_scramble)
+print(scrambled_songs)
+
+chosen_title = random_title(scrambled_songs)
+print(chosen_title)
+
 
 
 
