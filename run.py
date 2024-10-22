@@ -129,18 +129,20 @@ def random_title(titles_to_use):
     return random.choice(titles_to_use)
 
 def split_and_scramble(title):
-    print(title)
-    new_title = title.split(" ")
-    print(new_title)
-    for word in new_title:
-        print(word)
+    print(f"print title {title}")
+    title_arr = title.split(" ")
+    print(f"print title_arr {title_arr}")
+    title_arr_scrambled = []
+    for word in title_arr:
+        print(f"print word {word}")
         word = list(word)
         shuffle(word)
-        print(word)
         new_word = ''.join(word)
-        print(new_word)
+        print(f"print new_word {new_word}")
+        title_arr_scrambled.append(new_word)
 
-    #print(new_title)
+    print(f"print title_arr_scrambled {title_arr_scrambled}")
+    return (title_arr_scrambled)
 
 
 def scramble_title(title):
@@ -149,7 +151,7 @@ def scramble_title(title):
     """
     (title) = list(title)
     shuffle(title)
-    return ''.join(title)
+    return ' '.join(title)
  
 
 def clear():
@@ -177,7 +179,7 @@ chosen_title = random_title(titles_to_use)
 print(chosen_title)
 
 scrambled_title = scramble_title(chosen_title)
-print(scrambled_title)
+#print(scrambled_title)
 
 new_title = split_and_scramble(chosen_title)
 print(new_title)
