@@ -36,11 +36,6 @@ def get_username():
     game_title()
 
     while True:
-        #print("Welcome to Scramble Ed\n")
-        #print("Can you guess the Ed Sheeran song title before Ed tunes his guitar?\n")
-        #print("You have 3 attempts to unscramble the song title\n")
-        #print("Enter a username to start the game, max length 12 characters\n")
-
         username = input("Username here:\n")
 
         if validate_username(username):
@@ -73,13 +68,13 @@ def select_level(username):
     2. Consists of 2 word song titles.
     3. Consists of 3 word song titles.
     """
-    #clear()
+    clear()
     while True:
         print(f"Lets get started {username}\n")
         print("Please choose a level of difficulty: 1, 2, or 3\n")
         print("1 - 1 Word Song Titles\n")
         print("2 - 2 Word Song Titles\n")
-        print("3 - 3 Word Song Titles\n")
+        print("3 - 3 + Word Song Titles\n")
 
         level_choice = ""
         level_choice = input("Enter 1, 2 or 3: \n")
@@ -104,11 +99,11 @@ def validate_choice(choice):
         return False
     return True
 
+
 def load_words(choice):
     """
-    Load songs list into a list according to level choice
+    Load songs from worksheet column into a list according to level choice
     """
-
     titles_to_use = []
     songs = SHEET.worksheet('songs')
     
@@ -125,8 +120,8 @@ def random_title(titles_to_use):
     """
     Pick a random title from the list 'title_to_use"
     """
-
     return random.choice(titles_to_use)
+
 
 def split_and_scramble(title):
     """
@@ -143,21 +138,37 @@ def split_and_scramble(title):
         new_word = ''.join(word)
         title_arr_scrambled.append(new_word)
         scrambled_title = " ".join(title_arr_scrambled)
-
     if scrambled_title != title:
         return scrambled_title
     else:
         split_and_scramble(title)
-        
 
 
-"""
-def scramble_title(title):   
-    Shuffle the random title to return a scrambled word to the user
-    (title) = list(title)
-    shuffle(title)
-    return ''.join(title)
-""" 
+def load_question(username, scrambled_title, chosen_title):
+    """
+    loads the scrambled title and prompts the player to 
+    guess before the countdown timer expires
+    """
+    clear()
+    print(f"Good Luck {username}, your Scrambled Ed song title is:\n")
+    print(f"{scrambled_title}\n")
+
+    while True:
+        guess = input("Your Guess here:\n")
+        if check_guess(guess, chosen_title):
+            print("Well Done You've guessed it")
+            break
+        else:
+            print("Wrong guess please try again")
+    return guess    
+
+
+def check_guess(guess, chosen_title):
+      
+    if guess ==  chosen_title:
+        return True
+    else:
+        return False
 
 def clear():
     """
@@ -175,19 +186,16 @@ def clear():
 
 username = get_username()
 level_choice = select_level(username)
-#print(level_choice)
 
 titles_to_use = load_words(level_choice)
-#print(titles_to_use)
 
 chosen_title = random_title(titles_to_use)
-print(chosen_title)
-
-#scrambled_title = scramble_title(chosen_title)
-#print(scrambled_title)
+#print(chosen_title)
 
 scrambled_title = split_and_scramble(chosen_title)
-print(scrambled_title)
+#print(scrambled_title)
+
+load_question(username, scrambled_title, chosen_title)
 
 
 
