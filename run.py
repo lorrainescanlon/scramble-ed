@@ -106,7 +106,6 @@ def load_words(choice):
     """
     Load songs from worksheet column into a list according to level choice
     """
-    print(choice)
     titles_to_use = []
     songs = SHEET.worksheet('songs')
     
@@ -203,19 +202,14 @@ def play_again(username):
 
 
 def play_game(username):
-    #username = get_username()
-
+  
     level_choice = select_level(username)
-    #print(level_choice)
 
     titles_to_use = load_words(level_choice)
-    #print(titles_to_use)
 
     chosen_title = random_title(titles_to_use)
-    #print(chosen_title)
 
     scrambled_title = split_and_scramble(chosen_title)
-    #print(scrambled_title)
 
     load_question(username, scrambled_title, chosen_title)
 
@@ -229,17 +223,3 @@ def main():
 main()
 
 
-"""
-username = get_username()
-level_choice = select_level(username)
-
-titles_to_use = load_words(level_choice)
-
-chosen_title = random_title(titles_to_use)
-#print(chosen_title)
-
-scrambled_title = split_and_scramble(chosen_title)
-#print(scrambled_title)
-
-load_question(username, scrambled_title, chosen_title)
-"""
