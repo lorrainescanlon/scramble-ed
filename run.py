@@ -106,7 +106,7 @@ def validate_choice(choice):
 
 def load_words(choice):
     """
-    Load songs list into an array according to level choice
+    Load songs list into a list according to level choice
     """
 
     titles_to_use = []
@@ -123,26 +123,32 @@ def load_words(choice):
 
 def random_title(titles_to_use):
     """
-    Pick a random title from the array 'title_to_use"
+    Pick a random title from the list 'title_to_use"
     """
 
     return random.choice(titles_to_use)
 
 def split_and_scramble(title):
-    print(f"print title {title}")
+    """
+    Split song titles, scramble words and put back together as a string
+    """
+    # split the song title into list items
     title_arr = title.split(" ")
-    print(f"print title_arr {title_arr}")
+    # create a new list
     title_arr_scrambled = []
     for word in title_arr:
-        print(f"print word {word}")
+        # split each word into a list
         word = list(word)
+        # shiffle the list items or letters
         shuffle(word)
+        # create a new shuffled word by joining the letters together
         new_word = ''.join(word)
-        print(f"print new_word {new_word}")
+        # add new shuffled word to list
         title_arr_scrambled.append(new_word)
 
     print(f"print title_arr_scrambled {title_arr_scrambled}")
-    return (title_arr_scrambled)
+    #return string created by joining shuffled list words together
+    return " ".join(title_arr_scrambled)
 
 
 def scramble_title(title):
@@ -151,7 +157,7 @@ def scramble_title(title):
     """
     (title) = list(title)
     shuffle(title)
-    return ' '.join(title)
+    return ''.join(title)
  
 
 def clear():
