@@ -81,8 +81,10 @@ def select_level(username):
 
         if validate_choice(level_choice):
             print("Choice is valid")
-            break
+            break   
+
     return level_choice
+    
 
 def validate_choice(choice):
     """
@@ -104,6 +106,7 @@ def load_words(choice):
     """
     Load songs from worksheet column into a list according to level choice
     """
+    print(choice)
     titles_to_use = []
     songs = SHEET.worksheet('songs')
     
@@ -160,7 +163,9 @@ def load_question(username, scrambled_title, chosen_title):
             break
         else:
             print("Wrong guess please try again")
-    return guess    
+    #return guess    
+
+    play_again(username)
 
 
 def check_guess(guess, chosen_title):
@@ -183,7 +188,48 @@ def clear():
     else:
         _ = system('clear')
     
+def play_again(username):
+    print("Would you like to play again?")
+    play = input(" yes or no :\n")
 
+    if play =="yes":
+        play_game(username)
+    else:
+        print(f"Sorry you're leaving {username}")
+        get_username()
+
+
+
+
+
+def play_game(username):
+    #username = get_username()
+
+    level_choice = select_level(username)
+    #print(level_choice)
+
+    titles_to_use = load_words(level_choice)
+    #print(titles_to_use)
+
+    chosen_title = random_title(titles_to_use)
+    #print(chosen_title)
+
+    scrambled_title = split_and_scramble(chosen_title)
+    #print(scrambled_title)
+
+    load_question(username, scrambled_title, chosen_title)
+
+
+
+def main():
+    username = get_username()
+    play_game(username)
+
+
+main()
+
+
+"""
 username = get_username()
 level_choice = select_level(username)
 
@@ -196,11 +242,4 @@ scrambled_title = split_and_scramble(chosen_title)
 #print(scrambled_title)
 
 load_question(username, scrambled_title, chosen_title)
-
-
-
-
-
-
-
-
+"""
