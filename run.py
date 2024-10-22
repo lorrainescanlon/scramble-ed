@@ -130,24 +130,25 @@ def random_title(titles_to_use):
 
 def split_and_scramble(title):
     """
-    Split song titles, scramble words and put back together as a string
+    Split song title into list items
+    scramble words and add to new list
+    assemble scrambled words as a string
+    return scrambled string
     """
-    # split the song title into list items
     title_arr = title.split(" ")
-    # create a new list
     title_arr_scrambled = []
     for word in title_arr:
-        # split each word into a list
         word = list(word)
-        # shiffle the list items or letters
         shuffle(word)
-        # create a new shuffled word by joining the letters together
         new_word = ''.join(word)
-        # add new shuffled word to list
         title_arr_scrambled.append(new_word)
+        scrambled_title = " ".join(title_arr_scrambled)
 
-    #return string created by joining shuffled list words together
-    return " ".join(title_arr_scrambled)
+    if scrambled_title != title:
+        return scrambled_title
+    else:
+        split_and_scramble(title)
+        
 
 
 """
@@ -185,8 +186,8 @@ print(chosen_title)
 #scrambled_title = scramble_title(chosen_title)
 #print(scrambled_title)
 
-new_title = split_and_scramble(chosen_title)
-print(new_title)
+scrambled_title = split_and_scramble(chosen_title)
+print(scrambled_title)
 
 
 
