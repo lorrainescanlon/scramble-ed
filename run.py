@@ -17,11 +17,6 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('edsongs')
 
-#songs = SHEET.worksheet('songs')
-#data = songs.get_all_values()
-#scores = SHEET.worksheet('scores')
-#score_data = scores.get_all_values()
-
 """
 class User(object):
     name = ""
@@ -125,13 +120,32 @@ def load_words(choice):
         titles_to_use = songs.col_values(3)
     return titles_to_use
 
+
 def random_title(titles_to_use):
+    """
+    Pick a random title from the array 'title_to_use"
+    """
+
     return random.choice(titles_to_use)
+
+def split_and_scramble(title):
+    print(title)
+    new_title = title.split(" ")
+    print(new_title)
+    for word in new_title:
+        print(word)
+        word = list(word)
+        shuffle(word)
+        print(word)
+        new_word = ''.join(word)
+        print(new_word)
+
+    #print(new_title)
 
 
 def scramble_title(title):
     """     
-    Shuffle title
+    Shuffle the random title to return a scrambled word to the user
     """
     (title) = list(title)
     shuffle(title)
@@ -154,10 +168,10 @@ def clear():
 
 username = get_username()
 level_choice = select_level(username)
-print(level_choice)
+#print(level_choice)
 
 titles_to_use = load_words(level_choice)
-print(titles_to_use)
+#print(titles_to_use)
 
 chosen_title = random_title(titles_to_use)
 print(chosen_title)
@@ -165,6 +179,8 @@ print(chosen_title)
 scrambled_title = scramble_title(chosen_title)
 print(scrambled_title)
 
+new_title = split_and_scramble(chosen_title)
+print(new_title)
 
 
 
