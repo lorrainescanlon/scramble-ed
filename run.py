@@ -146,19 +146,17 @@ def split_and_scramble(title):
         # add new shuffled word to list
         title_arr_scrambled.append(new_word)
 
-    print(f"print title_arr_scrambled {title_arr_scrambled}")
     #return string created by joining shuffled list words together
     return " ".join(title_arr_scrambled)
 
 
-def scramble_title(title):
-    """     
+"""
+def scramble_title(title):   
     Shuffle the random title to return a scrambled word to the user
-    """
     (title) = list(title)
     shuffle(title)
     return ''.join(title)
- 
+""" 
 
 def clear():
     """
@@ -184,7 +182,7 @@ titles_to_use = load_words(level_choice)
 chosen_title = random_title(titles_to_use)
 print(chosen_title)
 
-scrambled_title = scramble_title(chosen_title)
+#scrambled_title = scramble_title(chosen_title)
 #print(scrambled_title)
 
 new_title = split_and_scramble(chosen_title)
