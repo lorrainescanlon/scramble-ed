@@ -4,6 +4,7 @@ import array
 from google.oauth2.service_account import Credentials
 from os import system, name
 from random import shuffle
+from art import game_title
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -37,12 +38,13 @@ def get_username():
     """
     Get username input from user
     """
+    game_title()
 
     while True:
-        print("Welcome to Scramble Ed\n")
-        print("Can you guess the Ed Sheeran song title before Ed tunes his guitar?\n")
-        print("You have 3 attempts to unscramble the song title\n")
-        print("Enter a username to start the game, max length 12 characters\n")
+        #print("Welcome to Scramble Ed\n")
+        #print("Can you guess the Ed Sheeran song title before Ed tunes his guitar?\n")
+        #print("You have 3 attempts to unscramble the song title\n")
+        #print("Enter a username to start the game, max length 12 characters\n")
 
         username = input("Username here:\n")
 
@@ -76,6 +78,7 @@ def select_level(username):
     2. Consists of 2 word song titles.
     3. Consists of 3 word song titles.
     """
+    #clear()
     while True:
         print(f"Lets get started {username}\n")
         print("Please choose a level of difficulty: 1, 2, or 3\n")
