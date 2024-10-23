@@ -70,8 +70,8 @@ def select_level(username):
     """
     clear()
     while True:
-        print(f"Lets get started {username}\n")
-        print("Please choose a level of difficulty: 1, 2, or 3\n")
+        #print(f"\nLets get started {username}\n")
+        print(f"\n\n{username} please choose a level of difficulty: 1, 2, or 3\n")
         print("1 - 1 Word Song Titles\n")
         print("2 - 2 Word Song Titles\n")
         print("3 - 3 + Word Song Titles\n")
@@ -152,23 +152,24 @@ def load_question(username, scrambled_title, chosen_title):
     guess before the countdown timer expires
     """
     clear()
-    print(f"Good Luck {username}, your Scrambled Ed song title is:\n")
+    print(f"\n\nGood Luck {username}, your Scrambled Ed song title is:\n")
     print(f"{scrambled_title}\n")
 
     now = time.time()
-    future = now + 15
+    future = now + 20
 
     while True:   
-        guess = input("Your Guess here:\n")
+        guess = input(f"Your Guess here:\n")
         if time.time() > future:
-            print("Time is up!")
+            print(f"\nTime is up!\n")
+            print(f"The correct answer was {chosen_title}\n")
             break
         else:
             if check_guess(guess, chosen_title):
-                print("Well Done You've guessed it")
+                print(f"\nWell Done You've guessed it\n")
                 break
             else:
-                print("Wrong guess please try again")    
+                print(f"\nWrong guess, please try again\n")    
 
     play_again(username)
 
@@ -199,17 +200,17 @@ def play_again(username):
     or the Intro page if no
     """
     print("Would you like to play again?")
-    play = input(" yes or no :\n")
+    play = input(f"yes or no :\n")
 
     if play =="yes":
         play_game(username)
     else:
-        print(f"Sorry you're leaving {username}")
+        print(f"\nSorry you're leaving {username}\n")
         bye()
         #main()
 
 def bye():
-    print("Goodbye Now")
+    print(f"Goodbye Now\n")
 
 
 
