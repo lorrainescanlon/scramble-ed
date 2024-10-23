@@ -162,6 +162,7 @@ def load_question(username, scrambled_title, chosen_title):
     while True:   
         guess = input("Your Guess here:\n")
         if time.time() > future:
+            print("Time is up!")
             break
         else:
             if check_guess(guess, chosen_title):
