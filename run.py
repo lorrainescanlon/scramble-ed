@@ -1,6 +1,7 @@
 import gspread
 import random
 import array
+import time
 from google.oauth2.service_account import Credentials
 from os import system, name
 from random import shuffle
@@ -155,13 +156,20 @@ def load_question(username, scrambled_title, chosen_title):
     print(f"Good Luck {username}, your Scrambled Ed song title is:\n")
     print(f"{scrambled_title}\n")
 
-    while True:
+    now = time.time()
+    future = now + 15
+
+    while True:   
         guess = input("Your Guess here:\n")
-        if check_guess(guess, chosen_title):
-            print("Well Done You've guessed it")
+        if time.time() > future:
             break
         else:
-            print("Wrong guess please try again")
+            if check_guess(guess, chosen_title):
+                print("Well Done You've guessed it")
+                break
+            else:
+                print("Wrong guess please try again")
+
     #return guess    
 
     play_again(username)
@@ -188,6 +196,10 @@ def clear():
         _ = system('clear')
     
 def play_again(username):
+    """
+    Returns the user to the level choice section if yes
+    or the Intro page if no
+    """
     print("Would you like to play again?")
     play = input(" yes or no :\n")
 
@@ -195,24 +207,21 @@ def play_again(username):
         play_game(username)
     else:
         print(f"Sorry you're leaving {username}")
-        get_username()
+        bye()
+        #main()
 
-
+def bye():
+    print("Goodbye Now")
 
 
 
 def play_game(username):
   
     level_choice = select_level(username)
-
     titles_to_use = load_words(level_choice)
-
     chosen_title = random_title(titles_to_use)
-
     scrambled_title = split_and_scramble(chosen_title)
-
     load_question(username, scrambled_title, chosen_title)
-
 
 
 def main():
