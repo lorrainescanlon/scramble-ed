@@ -156,20 +156,21 @@ def load_question(username, scrambled_title, chosen_title):
     print(f"{scrambled_title}\n")
 
     now = time.time()
-    future = now + 20
+    end_time = now + 20
 
-    while True:   
+    
+    while time.time() < end_time:
         guess = input(f"Your Guess here:\n")
-        if time.time() > future:
-            print(f"\nTime is up!\n")
-            print(f"The correct answer was {chosen_title}\n")
+        if check_guess(guess, chosen_title):
+            print(f"\nWell Done You've guessed it\n")
             break
         else:
-            if check_guess(guess, chosen_title):
-                print(f"\nWell Done You've guessed it\n")
-                break
-            else:
-                print(f"\nWrong guess, please try again\n")    
+            print(f"\nWrong guess, please try again\n")
+              
+
+    if time.time() >= end_time:
+        print(f"\nTime is up!\n")
+        print(f"The correct answer was {chosen_title}\n") 
 
     play_again(username)
 
@@ -200,9 +201,9 @@ def play_again(username):
     or the Intro page if no
     """
     print("Would you like to play again?")
-    play = input(f"yes or no :\n")
+    play = input(f"y for yes or n for no :\n")
 
-    if play =="yes":
+    if play =="y":
         play_game(username)
     else:
         print(f"\nSorry you're leaving {username}\n")
