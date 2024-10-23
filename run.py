@@ -29,7 +29,6 @@ class User(object):
 
 """
 
-
 def get_username():
     """
     Get username input from user
@@ -169,9 +168,7 @@ def load_question(username, scrambled_title, chosen_title):
                 print("Well Done You've guessed it")
                 break
             else:
-                print("Wrong guess please try again")
-
-    #return guess    
+                print("Wrong guess please try again")    
 
     play_again(username)
 
