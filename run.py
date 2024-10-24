@@ -5,7 +5,7 @@ import time
 from google.oauth2.service_account import Credentials
 from os import system, name
 from random import shuffle
-from art import game_title
+from art import game_title, guitar
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -75,11 +75,15 @@ def select_level(username):
         print("1 - 1 Word Song Titles\n")
         print("2 - 2 Word Song Titles\n")
         print("3 - 3 + Word Song Titles\n")
+        print("quit to exit")
 
         level_choice = ""
         level_choice = input("Enter 1, 2 or 3: \n")
 
-        if validate_choice(level_choice):
+        if level_choice == "quit":
+            clear()
+            get_username()
+        elif validate_choice(level_choice):
             print("Choice is valid")
             break   
 
@@ -161,14 +165,16 @@ def load_question(username, scrambled_title, chosen_title):
     
     while time.time() < end_time:
         guess = input(f"Your Guess here:\n")
-        if check_guess(guess, chosen_title):
+        if guess == "quit":
+            print(f"The correct answer was {chosen_title}\n")
+            break
+        elif check_guess(guess, chosen_title, username):
             print(f"\nWell Done You've guessed it\n")
             break
         else:
             clear()
             print(f"\nWrong guess, please try again\n")
-            print(f"\nYour Scrambled Ed song title is: {scrambled_title}\n")
-              
+            print(f"Your chosen song title is: {scrambled_title}")  
 
     if time.time() >= end_time:
         print(f"\nTime is up!\n")
@@ -177,7 +183,7 @@ def load_question(username, scrambled_title, chosen_title):
     play_again(username)
 
 
-def check_guess(guess, chosen_title):
+def check_guess(guess, chosen_title, username):
       
     if guess ==  chosen_title:
         return True
