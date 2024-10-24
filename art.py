@@ -19,7 +19,9 @@ def game_title():
         Enter a username or stage name to start, max length 12 characters
     """)
 
-
+def guitar():
+  print
+("""
                         ,-.        _.---._
                       |  `\.__.-''       `.
                        \  _        _  ,.   \
@@ -40,5 +42,5 @@ def game_title():
 |  I=|====\__/===========| o o o |
 |    ~   _      |         `#`#`#`
  \______/ \____/  
-
+""")
  
