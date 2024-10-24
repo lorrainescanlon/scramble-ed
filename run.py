@@ -165,7 +165,9 @@ def load_question(username, scrambled_title, chosen_title):
             print(f"\nWell Done You've guessed it\n")
             break
         else:
+            clear()
             print(f"\nWrong guess, please try again\n")
+            print(f"\nYour Scrambled Ed song title is: {scrambled_title}\n")
               
 
     if time.time() >= end_time:
