@@ -152,7 +152,8 @@ def split_and_scramble(title):
 def load_question(username, scrambled_title, chosen_title):
     """
     loads the scrambled title and prompts the player to 
-    guess before the countdown timer expires
+    guess. Calls valiadtion function and checks answer. 
+    before the countdown timer expires
     """
     clear()
     print(f"\n\nGood Luck {username}, your Scrambled Ed song title is:\n")
@@ -178,28 +179,6 @@ def load_question(username, scrambled_title, chosen_title):
     play_again(username)    
 
 
-
-    """
-    while time.time() < end_time:
-        guess = input(f"Your Guess here:\n")
-        if guess == "quit":
-            print(f"The correct answer was {chosen_title}\n")
-            break
-        elif check_guess(guess, chosen_title, username):
-            print(f"\nWell Done You've guessed it\n")
-            break
-        else:
-            clear()
-            print(f"\nWrong guess, please try again\n")
-            print(f"Your chosen song title is: {scrambled_title}")  
-
-    if time.time() >= end_time:
-        print(f"\nTime is up!\n")
-        print(f"The correct answer was {chosen_title}\n") 
-
-    #validate_guess(guess, chosen_title)
-    play_again(username)
-    """
 
 def validate_guess(guess, chosen_title):
     """
@@ -228,43 +207,6 @@ def validate_guess(guess, chosen_title):
         return False
     return True
 
-
-
-"""
-def check_guess(guess, chosen_title, username, scrambled_title):
-    
-      
-    if guess == chosen_title:
-        print(f"\nWell Done You've guessed it\n")
-        return True
-    else:
-        clear()
-        print(f"\nWrong guess, please try again\n")
-        print(f"Your chosen song title is: {scrambled_title}") 
-        return False
-"""    
- 
-"""
-    while time.time() < end_time:
-        guess = input(f"Your Guess here:\n")
-        if guess == "quit":
-            print(f"The correct answer was {chosen_title}\n")
-            break
-        elif check_guess(guess, chosen_title, username):
-            print(f"\nWell Done You've guessed it\n")
-            break
-        else:
-            clear()
-            print(f"\nWrong guess, please try again\n")
-            print(f"Your chosen song title is: {scrambled_title}")  
-
-    if time.time() >= end_time:
-        print(f"\nTime is up!\n")
-        print(f"The correct answer was {chosen_title}\n") 
-
-    #validate_guess(guess, chosen_title)
-    play_again(username)
-"""
 
 def clear():
     """
