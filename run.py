@@ -70,7 +70,6 @@ def select_level(username):
     """
     clear()
     while True:
-        #print(f"\nLets get started {username}\n")
         print(f"\n\n{username} please choose a level of difficulty: 1, 2, or 3\n")
         print("1 - 1 Word Song Titles\n")
         print("2 - 2 Word Song Titles\n")
@@ -162,7 +161,25 @@ def load_question(username, scrambled_title, chosen_title):
     now = time.time()
     end_time = now + 20
 
-    
+    while True:
+        guess = input(f"Your Guess here:\n")
+        if guess == "quit":
+            print(f"The correct answer was {chosen_title}\n")
+            break
+        elif validate_guess(guess, chosen_title):
+            if guess == chosen_title:
+                print(f"\nWell Done You've guessed it\n")
+                break
+            else:
+                clear()
+                print(f"\nWrong guess, please try again\n")
+                print(f"Your chosen song title is: {scrambled_title}") 
+            
+    play_again(username)    
+
+
+
+    """
     while time.time() < end_time:
         guess = input(f"Your Guess here:\n")
         if guess == "quit":
@@ -180,15 +197,74 @@ def load_question(username, scrambled_title, chosen_title):
         print(f"\nTime is up!\n")
         print(f"The correct answer was {chosen_title}\n") 
 
+    #validate_guess(guess, chosen_title)
     play_again(username)
+    """
+
+def validate_guess(guess, chosen_title):
+    """
+    Checks that the users guess contains the correct characters
+    """
+
+    guess_compare = list(guess)
+    title_compare = list(chosen_title)
+
+    try:
+        if len(guess_compare) < len(title_compare):
+            raise ValueError(
+                "You have used too few characters"
+            )
+        elif len(guess_compare) > len(title_compare):
+            raise ValueError(
+                "You have used too many characters"
+            )    
+        elif sorted(guess_compare) != sorted(title_compare):
+            raise ValueError(
+                "Incorrect characters used"
+            )
+
+    except ValueError as e:
+        print(f"Invalid input: {e}, please try again.\n")
+        return False
+    return True
 
 
-def check_guess(guess, chosen_title, username):
+
+"""
+def check_guess(guess, chosen_title, username, scrambled_title):
+    
       
-    if guess ==  chosen_title:
+    if guess == chosen_title:
+        print(f"\nWell Done You've guessed it\n")
         return True
     else:
+        clear()
+        print(f"\nWrong guess, please try again\n")
+        print(f"Your chosen song title is: {scrambled_title}") 
         return False
+"""    
+ 
+"""
+    while time.time() < end_time:
+        guess = input(f"Your Guess here:\n")
+        if guess == "quit":
+            print(f"The correct answer was {chosen_title}\n")
+            break
+        elif check_guess(guess, chosen_title, username):
+            print(f"\nWell Done You've guessed it\n")
+            break
+        else:
+            clear()
+            print(f"\nWrong guess, please try again\n")
+            print(f"Your chosen song title is: {scrambled_title}")  
+
+    if time.time() >= end_time:
+        print(f"\nTime is up!\n")
+        print(f"The correct answer was {chosen_title}\n") 
+
+    #validate_guess(guess, chosen_title)
+    play_again(username)
+"""
 
 def clear():
     """
