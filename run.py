@@ -6,7 +6,7 @@ import sys
 from google.oauth2.service_account import Credentials
 from os import system, name
 from random import shuffle
-from art import game_title, guitar
+from art import game_title_banner, guitar
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -20,22 +20,13 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('edsongs')
 SCORE = 0
 
-"""
-class User(object):
-    name = ""
-    score = 0
-
-    def __init__(self, name, score):
-        self.name = name
-        self.score = score
-
-"""
 
 def get_username():
     """
+    Display Game title banner
     Get username input from user
     """
-    game_title()
+    game_title_banner()
 
     while True:
         username = input("Username here:\n")
@@ -72,21 +63,17 @@ def select_level(username):
     """
     clear()
     while True:
-        print(f"\n\n{username} please choose a level of difficulty: 1, 2, or 3\n")
+        print(f"\n{username} please choose a level of difficulty: 1, 2, or 3\n")
         print("1 - 1 Word Song Titles\n")
         print("2 - 2 Word Song Titles\n")
         print("3 - 3 + Word Song Titles\n")
-        print("quit to exit")
 
         level_choice = ""
         level_choice = input("Enter 1, 2 or 3: \n")
 
-        if level_choice == "quit":
-            clear()
-            get_username()
-        elif validate_choice(level_choice):
-            print("Choice is valid")
-            break   
+        if validate_choice(level_choice):
+            break
+    
 
     return level_choice
     
@@ -102,7 +89,8 @@ def validate_choice(choice):
             )
 
     except ValueError as e:
-        print(f"Invalid data: {e}, please try again.\n")
+        clear()
+        print(f"\nInvalid data: {e}, please try again.")
         return False
     return True
 
@@ -113,7 +101,7 @@ def load_words(choice):
     """
     titles_to_use = []
     songs = SHEET.worksheet('songs')
-    
+        
     if choice == "1":
         titles_to_use = songs.col_values(1)
     elif choice == "2":
@@ -170,15 +158,15 @@ def load_question(username, scrambled_title, chosen_title):
         if guess == "quit":
             print(f"The correct answer was {chosen_title}\n")
             break
-        elif validate_guess(guess, chosen_title):
-            if guess == chosen_title:
+        
+        if validate_guess(guess, chosen_title) and guess == chosen_title:
                 print(f"\nWell Done You've guessed it\n")
                 increase_score()
                 break
-            else:
-                clear()
-                print(f"\nWrong guess, please try again\n")
-                print(f"Your chosen song title is: {scrambled_title}") 
+        else:
+            print(f"Wrong guess, please try again\n\n")
+            print(f"Your chosen song title is: {scrambled_title}\n")
+        
             
     play_again(username)    
 
@@ -205,9 +193,10 @@ def validate_guess(guess, chosen_title):
             raise ValueError(
                 "Incorrect characters used"
             )
-
+ 
     except ValueError as e:
-        print(f"Invalid input: {e}, please try again.\n")
+        clear()
+        print(f"\nInvalid input: {e}, please try again.\n")
         return False
     return True
 
@@ -218,7 +207,7 @@ def typewriter_print(title_string):
     """
 
     for char in title_string:
-        time.sleep(.3)
+        time.sleep(.26)
         sys.stdout.write(char)
         sys.stdout.flush()
         
@@ -257,7 +246,7 @@ def play_again(username):
         print(f"\nSorry you're leaving {username}\n")
         print(f"your final score is {SCORE}\n")
         update_scores(username, SCORE)
-        bye()
+        end_game()
 
 def update_scores(username, score):
     """
@@ -268,9 +257,10 @@ def update_scores(username, score):
     data = [username, score]
     scores_worksheet = SHEET.worksheet('scores')
     scores_worksheet.append_row(data)
+    SCORE = 0
 
 
-def bye():
+def end_game():
     """
     exit game
     """
