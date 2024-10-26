@@ -228,6 +228,10 @@ def clear():
         _ = system('clear')
 
 def increase_score(level_choice):
+    """
+    Increase score by 1, 2 or 3 according to level of difficulty
+    """
+
     global SCORE
     if level_choice == "1":
         SCORE +=1
@@ -243,15 +247,23 @@ def play_again(username):
     or the Intro page if no
     """
     print("Would you like to play again?")
-    play = input(f"y for yes or n for no :\n")
 
-    if play =="y":
-        play_game(username)
-    else:
-        print(f"\nSorry you're leaving {username}\n")
-        print(f"your final score is {SCORE}\n")
-        update_scores(username, SCORE)
-        end_game()
+    while True:
+        play = input(f"Y for Yes or N for No :\n")
+        if play in ("y", "Y"):
+            play_game(username)
+            break
+        elif play in ("n", "N"):
+            print(f"\nSorry you're leaving {username}\n")
+            print(f"your final score is {SCORE}\n")
+            update_scores(username, SCORE)
+            end_game()
+            break
+        else:
+            print(f"Incorrect input, please try again Y or N")
+
+        
+
 
 def update_scores(username, score):
     """
