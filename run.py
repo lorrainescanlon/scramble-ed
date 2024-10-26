@@ -139,7 +139,7 @@ def split_and_scramble(title):
         split_and_scramble(title)
 
 
-def load_question(username, scrambled_title, chosen_title):
+def load_question(username, scrambled_title, chosen_title, level_choice):
     """
     loads the scrambled title and prompts the player to 
     guess. Calls valiadtion function and checks answer. 
@@ -161,7 +161,7 @@ def load_question(username, scrambled_title, chosen_title):
         
         if validate_guess(guess, chosen_title) and guess == chosen_title:
                 print(f"\nWell Done You've guessed it\n")
-                increase_score()
+                increase_score(level_choice)
                 break
         else:
             print(f"Wrong guess, please try again\n\n")
@@ -227,9 +227,14 @@ def clear():
     else:
         _ = system('clear')
 
-def increase_score():
+def increase_score(level_choice):
     global SCORE
-    SCORE +=1
+    if level_choice == "1":
+        SCORE +=1
+    elif level_choice == "2":
+        SCORE +=2
+    elif level_choice == "3":
+        SCORE +=3
 
     
 def play_again(username):
@@ -274,7 +279,7 @@ def play_game(username):
     titles_to_use = load_words(level_choice)
     chosen_title = random_title(titles_to_use)
     scrambled_title = split_and_scramble(chosen_title)
-    load_question(username, scrambled_title, chosen_title)
+    load_question(username, scrambled_title, chosen_title, level_choice)
 
 
 def main():
