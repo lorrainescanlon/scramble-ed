@@ -160,7 +160,6 @@ def load_question(username, scrambled_title, chosen_title):
     clear()
     print(f"\n\nGood Luck {username}, your Scrambled Ed song title is:\n")
     typewriter_print(scrambled_title)
-    #print(f"{scrambled_title}\n")
 
     now = time.time()
     end_time = now + 20
@@ -180,8 +179,7 @@ def load_question(username, scrambled_title, chosen_title):
                 clear()
                 print(f"\nWrong guess, please try again\n")
                 print(f"Your chosen song title is: {scrambled_title}") 
-    
-    print(f"score from within load question is {SCORE}\n")        
+            
     play_again(username)    
 
 
@@ -213,7 +211,12 @@ def validate_guess(guess, chosen_title):
         return False
     return True
 
+
 def typewriter_print(title_string):
+    """
+    gives typewriter effect when printing  the scramled title
+    """
+
     for char in title_string:
         time.sleep(.3)
         sys.stdout.write(char)
@@ -238,14 +241,13 @@ def clear():
 def increase_score():
     global SCORE
     SCORE +=1
-    print(f"score from within increase score is {SCORE}\n")
+
     
 def play_again(username):
     """
     Returns the user to the level choice section if yes
     or the Intro page if no
     """
-    print(f"score from within play again is {SCORE}\n")
     print("Would you like to play again?")
     play = input(f"y for yes or n for no :\n")
 
@@ -256,16 +258,22 @@ def play_again(username):
         print(f"your final score is {SCORE}\n")
         update_scores(username, SCORE)
         bye()
-        #main()
 
 def update_scores(username, score):
+    """
+    Update the SCORE bby increasing it by 1 
+    each time this function is called
+    """
+
     data = [username, score]
-    print(f"writing {data} to spreadsheet\n")
     scores_worksheet = SHEET.worksheet('scores')
     scores_worksheet.append_row(data)
 
 
 def bye():
+    """
+    exit game
+    """
     print(f"Goodbye Now\n")
 
 
