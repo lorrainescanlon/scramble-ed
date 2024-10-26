@@ -254,6 +254,7 @@ def play_again(username):
             play_game(username)
             break
         elif play in ("n", "N"):
+            clear()
             print(f"\nSorry you're leaving {username}\n")
             print(f"your final score is {SCORE}\n")
             update_scores(username, SCORE)
@@ -274,14 +275,29 @@ def update_scores(username, score):
     data = [username, score]
     scores_worksheet = SHEET.worksheet('scores')
     scores_worksheet.append_row(data)
+    score_board()
     SCORE = 0
 
+
+def score_board():
+    """
+    return top 5 scores from spreadsheet
+    """
+    scores_data = SHEET.worksheet('scores')
+    scores_data.sort((2, 'des'))
+ 
+    i = 0
+    print("The Top 5 Scores are as follows")
+    while i < 5:
+        print(f"\n       {(scores_data.col_values(1)[i])}:    {(scores_data.col_values(2)[i])}") 
+        i +=1
+    
 
 def end_game():
     """
     exit game
     """
-    print(f"Goodbye Now\n")
+    print(f"\nGoodbye Now\n")
 
 
 
