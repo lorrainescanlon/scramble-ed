@@ -18,6 +18,7 @@ CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('edsongs')
+SCORE = 0
 
 """
 class User(object):
@@ -163,6 +164,7 @@ def load_question(username, scrambled_title, chosen_title):
 
     now = time.time()
     end_time = now + 20
+        
 
     while True:
         guess = input(f"Your Guess here:\n")
@@ -172,12 +174,14 @@ def load_question(username, scrambled_title, chosen_title):
         elif validate_guess(guess, chosen_title):
             if guess == chosen_title:
                 print(f"\nWell Done You've guessed it\n")
+                increase_score()
                 break
             else:
                 clear()
                 print(f"\nWrong guess, please try again\n")
                 print(f"Your chosen song title is: {scrambled_title}") 
-            
+    
+    print(f"score from within load question is {SCORE}\n")        
     play_again(username)    
 
 
@@ -230,12 +234,18 @@ def clear():
     #to clear mac and linux machines
     else:
         _ = system('clear')
+
+def increase_score():
+    global SCORE
+    SCORE +=1
+    print(f"score from within increase score is {SCORE}\n")
     
 def play_again(username):
     """
     Returns the user to the level choice section if yes
     or the Intro page if no
     """
+    print(f"score from within play again is {SCORE}\n")
     print("Would you like to play again?")
     play = input(f"y for yes or n for no :\n")
 
@@ -243,8 +253,17 @@ def play_again(username):
         play_game(username)
     else:
         print(f"\nSorry you're leaving {username}\n")
+        print(f"your final score is {SCORE}\n")
+        update_scores(username, SCORE)
         bye()
         #main()
+
+def update_scores(username, score):
+    data = [username, score]
+    print(f"writing {data} to spreadsheet\n")
+    scores_worksheet = SHEET.worksheet('scores')
+    scores_worksheet.append_row(data)
+
 
 def bye():
     print(f"Goodbye Now\n")
