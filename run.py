@@ -2,6 +2,7 @@ import gspread
 import random
 import array
 import time
+import sys
 from google.oauth2.service_account import Credentials
 from os import system, name
 from random import shuffle
@@ -157,7 +158,8 @@ def load_question(username, scrambled_title, chosen_title):
     """
     clear()
     print(f"\n\nGood Luck {username}, your Scrambled Ed song title is:\n")
-    print(f"{scrambled_title}\n")
+    typewriter_print(scrambled_title)
+    #print(f"{scrambled_title}\n")
 
     now = time.time()
     end_time = now + 20
@@ -206,6 +208,14 @@ def validate_guess(guess, chosen_title):
         print(f"Invalid input: {e}, please try again.\n")
         return False
     return True
+
+def typewriter_print(title_string):
+    for char in title_string:
+        time.sleep(.3)
+        sys.stdout.write(char)
+        sys.stdout.flush()
+        
+    print(f"\n")
 
 
 def clear():
