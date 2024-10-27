@@ -167,7 +167,7 @@ def load_question(username, scrambled_title, chosen_title, level_choice, guitar)
             print(f"{guitar[0]}")
             print(f"The correct title was {chosen_title} ")
             update_scores(username, SCORE)
-            #end_game()
+            #end_game()clear
             break
         elif check_time(time_up, guitar, username) == False:
             clear()
@@ -177,17 +177,23 @@ def load_question(username, scrambled_title, chosen_title, level_choice, guitar)
             update_scores(username, SCORE)
             break
         elif check_time(time_up, guitar, username) and LIVES != 0:
-            clear()
             if validate_guess(guess, chosen_title) and guess == chosen_title:   
                 print(f"\nWell Done You've guessed it\n")
                 increase_score(level_choice)
-                break
-            else:               
-                print(f"\nWrong guess, please try again\n")
-                loose_a_life()
+                break      
+            else:                                  
+                loose_a_life()         
                 if LIVES == 0:
-                    break
-                print(f"Your chosen song title is: {scrambled_title}\n")    
+                    clear()
+                    print(f"Game Over - You have run out of Lives")
+                    print(f"{guitar[0]}")
+                    print(f"The correct title was {chosen_title} ")
+                    update_scores(username, SCORE)
+                    break   
+                print(f"\nWrong guess, please try again\n")
+                print(f"Your chosen song title is: {scrambled_title}\n")
+
+
 
     play_again(username)    
 
