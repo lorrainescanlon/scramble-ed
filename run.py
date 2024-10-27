@@ -7,6 +7,7 @@ from google.oauth2.service_account import Credentials
 from os import system, name
 from random import shuffle
 from art import game_title_banner, guitar, score_board_banner
+from colours import tcolours
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -32,7 +33,7 @@ def get_username():
         username = input("Username here:\n")
 
         if validate_username(username):
-            print("Username is valid")
+            #print("Username is valid")
             break
     return username
 
@@ -49,7 +50,7 @@ def validate_username(name):
             )
 
     except ValueError as e:
-        print(f"Invalid data: {e}, please try again.\n")
+        print(f"\n{tcolours.red}Invalid data: {e}, please try again.{tcolours.end}\n")
         return False
     return True
 
@@ -89,7 +90,7 @@ def validate_choice(choice):
 
     except ValueError as e:
         clear()
-        print(f"\nInvalid data: {e}, please try again.")
+        print(f"\n{tcolours.red}Invalid data: {e}, please try again.{tcolours.end}")
         return False
     return True
 
@@ -172,10 +173,11 @@ def load_question(username, scrambled_title, chosen_title, level_choice, guitar)
             clear()
             print("Game Over - You have run out of time")
             print(f"{guitar[0]}")
-            print(f"The correct title was {chosen_title} ")
+            print(f"\nThe correct title was {chosen_title}\n ")
             update_scores(username, SCORE)
             break
         elif check_time(time_up, guitar, username) and LIVES != 0:
+            clear()
             if validate_guess(guess, chosen_title) and guess == chosen_title:   
                 print(f"\nWell Done You've guessed it\n")
                 increase_score(level_choice)
@@ -234,7 +236,7 @@ def validate_guess(guess, chosen_title):
  
     except ValueError as e:
         clear()
-        print(f"\nInvalid input: {e}, please try again.\n")
+        print(f"\n{tcolours.red}Invalid input: {e}, please try again.{tcolours.end}\n")
         return False
     return True
 
@@ -312,7 +314,7 @@ def play_again(username):
             end_game()
             break
         else:
-            print(f"Incorrect input, please try again Y or N")
+            print(f"{tcolours.red}Incorrect input, please try again Y or N{tcolours.end}")
 
 
 def update_scores(username, score):
