@@ -20,6 +20,7 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('edsongs')
 SCORE = 0
 LIVES = 3
+#NOW = time.time()
 
 def get_username():
     """
@@ -139,7 +140,7 @@ def split_and_scramble(title):
         split_and_scramble(title)
 
 
-def load_question(username, scrambled_title, chosen_title, level_choice):
+def load_question(username, scrambled_title, chosen_title, level_choice, guitar):
     """
     loads the scrambled title and prompts the player to 
     guess. Calls valiadtion function and checks answer. 
@@ -148,23 +149,28 @@ def load_question(username, scrambled_title, chosen_title, level_choice):
     clear()
     print(f"\n\nGood Luck {username}, your Scrambled Ed song title is:\n")
     typewriter_print(scrambled_title)
+    print(f"{(guitar[3])}")
+    time_up = set_time()
 
-    now = time.time()
-    end_time = now + 20
-    global LIVES    
+    #now = time.time()
+    #end_time = now + 20
+    global LIVES
+    global NOW   
 
     while True:
         guess = input(f"Your Guess here:\n")
         if guess == "quit":
             print(f"The correct answer was {chosen_title}\n")
             break
-        
-        if validate_guess(guess, chosen_title) and guess == chosen_title:
+
+        check_time(time_up, guitar)
+        if validate_guess(guess, chosen_title) and guess == chosen_title:    
                 print(f"\nWell Done You've guessed it\n")
                 increase_score(level_choice)
                 break
         else:
             print(f"Wrong guess, please try again\n\n")
+            check_time(time_up, guitar)
             print(f"Your chosen song title is: {scrambled_title}\n")
             loose_a_life()
             if LIVES <= 0:
@@ -174,6 +180,30 @@ def load_question(username, scrambled_title, chosen_title, level_choice):
                 break
                 
     play_again(username)    
+
+def set_time():
+    NOW = time.time()
+    timer = NOW + 20
+    print(f"now time {NOW}, time up set {timer}")
+    return timer
+
+def check_time(time_up, guitar):
+    #global NOW
+    time_left = time_up - (time.time())
+    print(f"\n time left {time_left}")
+    
+    if int(time_left) <= 0:
+        print(f"{guitar[0]}")
+    elif int(time_left) <=10:
+        print(f"{guitar[1]}")
+    elif int(time_left) <=20:
+        print(f"{guitar[2]}")
+    elif int(time_left) <=30:
+        print(f"{guitar[3]}")    
+
+        #return False
+   # else:
+        #return True    
 
 
 
@@ -327,7 +357,7 @@ def play_game(username):
     titles_to_use = load_words(level_choice)
     chosen_title = random_title(titles_to_use)
     scrambled_title = split_and_scramble(chosen_title)
-    load_question(username, scrambled_title, chosen_title, level_choice)
+    load_question(username, scrambled_title, chosen_title, level_choice, guitar)
 
 
 def main():
