@@ -183,7 +183,7 @@ def load_question(username, scrambled_title, chosen_title, level_choice, guitar)
 
 def set_time():
     NOW = time.time()
-    timer = NOW + 20
+    timer = NOW + 30
     print(f"now time {NOW}, time up set {timer}")
     return timer
 
