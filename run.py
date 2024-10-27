@@ -101,13 +101,10 @@ def load_words(choice):
     """
     titles_to_use = []
     songs = SHEET.worksheet('songs')
-        
-    if choice == "1":
-        titles_to_use = songs.col_values(1)
-    elif choice == "2":
-        titles_to_use = songs.col_values(2)
-    elif choice == "3":
-        titles_to_use = songs.col_values(3)
+    
+    titles_to_use = songs.col_values(int(choice))
+    print(f"{titles_to_use}")
+
     return titles_to_use
 
 
