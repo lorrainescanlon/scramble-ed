@@ -6,7 +6,7 @@ import sys
 from google.oauth2.service_account import Credentials
 from os import system, name
 from random import shuffle
-from art import game_title_banner, guitar
+from art import game_title_banner, guitar, score_board_banner
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -20,7 +20,6 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('edsongs')
 SCORE = 0
 LIVES = 3
-#NOW = time.time()
 
 def get_username():
     """
@@ -75,7 +74,6 @@ def select_level(username):
         if validate_choice(level_choice):
             break
     
-
     return level_choice
     
 
@@ -142,9 +140,12 @@ def split_and_scramble(title):
 
 def load_question(username, scrambled_title, chosen_title, level_choice, guitar):
     """
-    loads the scrambled title and prompts the player to 
-    guess. Calls valiadtion function and checks answer. 
-    before the countdown timer expires
+    loads the scrambled title and prompts the player to enter a guess.
+    Calls the timer function to set a timer for the game. 
+    Calls the valiadtion function to validate input.
+    Checks answer, if correct increases score and prompts user to play again.
+    If incorrect, reduces lives and updates ascii image. 
+    Prompts the user to try again until lives are 0 are time is up.
     """
     clear()
     print(f"\n\nGood Luck {username}, your Scrambled Ed song title is:\n")
@@ -152,66 +153,68 @@ def load_question(username, scrambled_title, chosen_title, level_choice, guitar)
     print(f"{(guitar[3])}")
     time_up = set_time()
 
-    #now = time.time()
-    #end_time = now + 20
     global LIVES
-    global NOW   
 
     while True:
         guess = input(f"Your Guess here:\n")
         if guess == "quit":
             print(f"The correct answer was {chosen_title}\n")
             break
-
-        check_time(time_up, guitar)
-        if validate_guess(guess, chosen_title) and guess == chosen_title:    
+        elif LIVES == 0:
+            clear()
+            print(f"Game Over - You have run out of Lives")
+            print(f"{guitar[0]}")
+            print(f"The correct title was {chosen_title} ")
+            update_scores(username, SCORE)
+            #end_game()
+            break
+        elif check_time(time_up, guitar, username) == False:
+            clear()
+            print("Game Over - You have run out of time")
+            print(f"{guitar[0]}")
+            print(f"The correct title was {chosen_title} ")
+            update_scores(username, SCORE)
+            break
+        elif check_time(time_up, guitar, username) and LIVES != 0:
+            if validate_guess(guess, chosen_title) and guess == chosen_title:   
                 print(f"\nWell Done You've guessed it\n")
                 increase_score(level_choice)
                 break
-        else:
-            print(f"Wrong guess, please try again\n\n")
-            check_time(time_up, guitar)
-            print(f"Your chosen song title is: {scrambled_title}\n")
-            loose_a_life()
-            if LIVES <= 0:
-                print(f"Game Over")
-                update_scores(username, SCORE)
-                end_game()
-                break
-                
+            else:               
+                print(f"\nWrong guess, please try again\n")
+                loose_a_life()
+                if LIVES == 0:
+                    break
+                print(f"Your chosen song title is: {scrambled_title}\n")    
+
     play_again(username)    
+
 
 def set_time():
     NOW = time.time()
     timer = NOW + 30
-    print(f"now time {NOW}, time up set {timer}")
     return timer
 
-def check_time(time_up, guitar):
-    #global NOW
+
+def check_time(time_up, guitar, username):
+    global LIVES
     time_left = time_up - (time.time())
-    print(f"\n time left {time_left}")
-    
     if int(time_left) <= 0:
+        clear()
+        print(f"Times Up")
         print(f"{guitar[0]}")
-    elif int(time_left) <=10:
-        print(f"{guitar[1]}")
-    elif int(time_left) <=20:
-        print(f"{guitar[2]}")
-    elif int(time_left) <=30:
-        print(f"{guitar[3]}")    
-
-        #return False
-   # else:
-        #return True    
-
+        LIVES = 0
+        return False
+    else:
+        return True
+        
+     
 
 
 def validate_guess(guess, chosen_title):
     """
     Checks that the users guess contains the correct characters
     """
-
     guess_compare = list(guess)
     title_compare = list(chosen_title)
 
@@ -238,9 +241,8 @@ def validate_guess(guess, chosen_title):
 
 def typewriter_print(title_string):
     """
-    gives typewriter effect when printing  the scramled title
+    gives typewriter effect when printing the scramled title
     """
-
     for char in title_string:
         time.sleep(.2)
         sys.stdout.write(char)
@@ -253,20 +255,18 @@ def clear():
     """
     Clears console screen
     """
-
     #to clear windows machines
     if name == 'nt':
         _ = system('cls')
-    
     #to clear mac and linux machines
     else:
         _ = system('clear')
+
 
 def increase_score(level_choice):
     """
     Increase score by 1, 2 or 3 according to level of difficulty
     """
-
     global SCORE
     if level_choice == "1":
         SCORE +=1
@@ -275,21 +275,30 @@ def increase_score(level_choice):
     elif level_choice == "3":
         SCORE +=3
 
+
 def loose_a_life():
+    """
+    Reduce LIVES by 1
+    Print remaining lives/life to console
+    String guitar
+    """
     global LIVES
     LIVES = LIVES -1
-    print(f"\nYou just lost a life, you have {LIVES} left\n")
+    if LIVES == 1:
+        print(f"\nYou have {LIVES} Life left\n")
+        print(f"{guitar[(LIVES)]}")
+    else:
+        print(f"\nYou have {LIVES} Lives left\n")
+        print(f"{guitar[(LIVES)]}")
 
-    
 
-    
+
 def play_again(username):
     """
     Returns the user to the level choice section if yes
     or the Intro page if no
     """
     print("Would you like to play again?")
-
     while True:
         play = input(f"Y for Yes or N for No :\n")
         if play in ("y", "Y"):
@@ -305,8 +314,6 @@ def play_again(username):
         else:
             print(f"Incorrect input, please try again Y or N")
 
-        
-
 
 def update_scores(username, score):
     """
@@ -318,7 +325,6 @@ def update_scores(username, score):
     data = [username, score]
     scores_worksheet = SHEET.worksheet('scores')
     scores_worksheet.append_row(data)
-    #score_board()
     SCORE = 0
     LIVES = 3
 
@@ -327,15 +333,20 @@ def score_board():
     """
     return top 5 scores from spreadsheet
     """
+    score_board_banner()
     scores_data = SHEET.worksheet('scores')
     scores_data.sort((2, 'des'))
- 
     i = 0
-    print("The Top 5 Scores are as follows")
+    #print("The Top 5 Scores are as follows")
     while i < 5:
         print(f"\n       {(scores_data.col_values(1)[i])}:    {(scores_data.col_values(2)[i])}") 
         i +=1
-    
+
+
+def reset_lives():
+    global LIVES
+    LIVES = 3
+
 
 def end_game():
     """
@@ -344,15 +355,13 @@ def end_game():
     global SCORE
     global LIVES
 
-    #SCORE = 0
-    #LIVES = 3
     score_board()
     print(f"\nEnd Game\n")
 
 
 
 def play_game(username):
-  
+    reset_lives()
     level_choice = select_level(username)
     titles_to_use = load_words(level_choice)
     chosen_title = random_title(titles_to_use)
