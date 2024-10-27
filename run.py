@@ -19,7 +19,7 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('edsongs')
 SCORE = 0
-
+LIVES = 3
 
 def get_username():
     """
@@ -151,7 +151,7 @@ def load_question(username, scrambled_title, chosen_title, level_choice):
 
     now = time.time()
     end_time = now + 20
-        
+    global LIVES    
 
     while True:
         guess = input(f"Your Guess here:\n")
@@ -166,8 +166,13 @@ def load_question(username, scrambled_title, chosen_title, level_choice):
         else:
             print(f"Wrong guess, please try again\n\n")
             print(f"Your chosen song title is: {scrambled_title}\n")
-        
-            
+            loose_a_life()
+            if LIVES <= 0:
+                print(f"Game Over")
+                update_scores(username, SCORE)
+                end_game()
+                break
+                
     play_again(username)    
 
 
@@ -207,7 +212,7 @@ def typewriter_print(title_string):
     """
 
     for char in title_string:
-        time.sleep(.26)
+        time.sleep(.2)
         sys.stdout.write(char)
         sys.stdout.flush()
         
@@ -240,6 +245,13 @@ def increase_score(level_choice):
     elif level_choice == "3":
         SCORE +=3
 
+def loose_a_life():
+    global LIVES
+    LIVES = LIVES -1
+    print(f"\nYou just lost a life, you have {LIVES} left\n")
+
+    
+
     
 def play_again(username):
     """
@@ -271,12 +283,14 @@ def update_scores(username, score):
     Update the SCORE bby increasing it by 1 
     each time this function is called
     """
-
+    global SCORE
+    global LIVES
     data = [username, score]
     scores_worksheet = SHEET.worksheet('scores')
     scores_worksheet.append_row(data)
-    score_board()
+    #score_board()
     SCORE = 0
+    LIVES = 3
 
 
 def score_board():
@@ -297,7 +311,13 @@ def end_game():
     """
     exit game
     """
-    print(f"\nGoodbye Now\n")
+    global SCORE
+    global LIVES
+
+    #SCORE = 0
+    #LIVES = 3
+    score_board()
+    print(f"\nEnd Game\n")
 
 
 
