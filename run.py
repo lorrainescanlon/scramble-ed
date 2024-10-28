@@ -143,7 +143,7 @@ def load_question(username, scrambled_title, chosen_title, level_choice, guitar)
     """
     clear()
     print(f"\n\nGood Luck {username}, your Scrambled Ed song title is:\n")
-    typewriter_print(scrambled_title)
+    typewriter_print(scrambled_title, .2)
     print(f"{tcolours.blue}{(guitar[3])}{tcolours.end}")
     time_up = set_time()
 
@@ -202,12 +202,12 @@ def check_time(username, time_up, chosen_title):
         return True
         
 
-def typewriter_print(title_string):
+def typewriter_print(title_string, speed):
     """
-    gives typewriter effect when printing the scramled title
+    gives typewriter effect when printing to the console
     """
     for char in title_string:
-        time.sleep(.2)
+        time.sleep(speed)
         sys.stdout.write(char)
         sys.stdout.flush()
         
@@ -315,7 +315,6 @@ def end_game(username, reason, chosen_title):
     Asks the user do they want to play again
     """
     global SCORE
-    #print(f"{tcolours.green}{game_over_banner[0]}{tcolours.end}")
     clear()
     print(f"{tcolours.red}Game Over{tcolours.end} - {reason}")
     print(f"{tcolours.blue}{guitar[0]}{tcolours.end}")
@@ -326,8 +325,12 @@ def end_game(username, reason, chosen_title):
 
 
 def exit():
+    clear()
+    print(f"\n\n")
+    typewriter_print((f"{tcolours.blue}{game_over_banner[0]}{tcolours.end}"), .01)
+    time.sleep(.5)
     score_board()
-    #print(f"\nEnd Game\n")
+    print(f"\nEnd Game\n")
 
 
 def play_game(username):
