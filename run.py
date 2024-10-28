@@ -218,10 +218,8 @@ def clear():
     """
     Clears console screen
     """
-    #to clear windows machines
     if name == 'nt':
         _ = system('cls')
-    #to clear mac and linux machines
     else:
         _ = system('clear')
 
@@ -329,7 +327,7 @@ def end_game(username, reason, chosen_title):
 
 def exit():
     score_board()
-    print(f"\nEnd Game\n")
+    #print(f"\nEnd Game\n")
 
 
 def play_game(username):
