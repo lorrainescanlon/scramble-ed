@@ -101,10 +101,8 @@ def load_words(choice):
     """
     titles_to_use = []
     songs = SHEET.worksheet('songs')
-    
     titles_to_use = songs.col_values(int(choice))
     print(f"{titles_to_use}")
-
     return titles_to_use
 
 
@@ -158,37 +156,19 @@ def load_question(username, scrambled_title, chosen_title, level_choice, guitar)
         if guess == "quit":
             print(f"The correct answer was {tcolours.green}{chosen_title}{tcolours.end}\n")
             break
-        elif LIVES == 0:
-            clear()
-            print(f"{tcolours.red}Game Over{tcolours.end} - You have run out of Lives")
-            print(f"{tcolours.blue}{guitar[0]}{tcolours.end}")
-            print(f"The correct title was {tcolours.green}{chosen_title}{tcolours.end} ")
-            update_scores(username, SCORE)
-            break
-        elif check_time(time_up, guitar, username) == False:
-            clear()
-            print(f"{tcolours.red}Game Over{tcolours.end} - You have run out of time")
-            print(f"{tcolours.blue}{guitar[0]}{tcolours.end}")
-            print(f"\nThe correct title was {tcolours.green}{chosen_title}{tcolours.end}\n ")
-            update_scores(username, SCORE)
-            break
-        elif check_time(time_up, guitar, username) and LIVES != 0:
-            if validate_guess(guess, chosen_title) and guess == chosen_title:   
+        elif check_lives() and check_time(time_up):
+            if guess == chosen_title:   
                 print(f"\n{tcolours.green}Well Done You've guessed it{tcolours.end}\n")
                 increase_score(level_choice)
-                break      
-            else:                                  
-                loose_a_life()         
-                if LIVES == 0:
-                    clear()
-                    print(f"{tcolours.red}Game Over{tcolours.end} - You have run out of Lives")
-                    print(f"{tcolours.blue}{guitar[0]}{tcolours.end}")
-                    print(f"The correct title was {tcolours.green}{chosen_title}{tcolours.end} ")
-                    update_scores(username, SCORE)
-                    break  
+                break
+            else:
+                clear()
                 print(f"\n{tcolours.red}Wrong guess, please try again{tcolours.end}\n")
-                print(f"Your chosen song title is: {scrambled_title}\n")
-
+                loose_a_life()
+                if LIVES > 0:
+                    print(f"Your chosen song title is: {scrambled_title}\n")
+                else:
+                    break           
 
 
     play_again(username)    
@@ -199,49 +179,23 @@ def set_time():
     timer = NOW + 30
     return timer
 
-
-def check_time(time_up, guitar, username):
+def check_lives():
     global LIVES
+    reason = "You have run out of Lives"
+    if LIVES == 0:
+        end_game(reason)
+    else:
+        return True
+
+
+def check_time(time_up):
     time_left = time_up - (time.time())
+    reason = "You have run out of time"
     if int(time_left) <= 0:
-        clear()
-        print(f"{tcolours.red}Times Up{tcolours.end}")
-        print(f"{tcolours.blue}{guitar[0]}{tcolours.end}")
-        LIVES = 0
-        return False
+        end_game(reason)
     else:
         return True
         
-     
-
-
-def validate_guess(guess, chosen_title):
-    """
-    Checks that the users guess contains the correct characters
-    """
-    guess_compare = list(guess)
-    title_compare = list(chosen_title)
-
-    try:
-        if len(guess_compare) < len(title_compare):
-            raise ValueError(
-                "You have used too few characters"
-            )
-        elif len(guess_compare) > len(title_compare):
-            raise ValueError(
-                "You have used too many characters"
-            )    
-        elif sorted(guess_compare) != sorted(title_compare):
-            raise ValueError(
-                "Incorrect characters used"
-            )
- 
-    except ValueError as e:
-        clear()
-        print(f"\n{tcolours.red}Invalid input: {e}, please try again.{tcolours.end}\n")
-        return False
-    return True
-
 
 def typewriter_print(title_string):
     """
@@ -308,11 +262,9 @@ def play_again(username):
         if play in ("y", "Y"):
             play_game(username)
             break
-        elif play in ("n", "N"):
-            clear()
-            end_game(username, SCORE)
-            
+        elif play in ("n", "N"):         
             update_scores(username, SCORE)
+            exit()
             break
         else:
             print(f"{tcolours.red}Incorrect input, please try again Y or N{tcolours.end}")
@@ -341,9 +293,8 @@ def score_board():
     scores_data = SHEET.worksheet('scores')
     scores_data.sort((2, 'des'))
     i = 0
-    #print("The Top 5 Scores are as follows")
     while i < 5:
-        print(f"\n     {tcolours.mag}{(scores_data.col_values(1)[i])}:    {(scores_data.col_values(2)[i])}{tcolours.end}") 
+        print(f"\n   {tcolours.mag}{(scores_data.col_values(1)[i])}:  {(scores_data.col_values(2)[i])}{tcolours.end}") 
         i +=1
 
 
@@ -352,18 +303,31 @@ def reset_lives():
     LIVES = 3
 
 
-def end_game(username, SCORE):
+def end_game(username, reason):
     """
     exit game
     """
-    print(f"{tcolours.green}{game_over_banner[0]}{tcolours.end}")
-    print(f"\nSorry you're leaving {username}\n")
+    global SCORE
+    #print(f"{tcolours.green}{game_over_banner[0]}{tcolours.end}")
+    print(f"{tcolours.red}Game Over{tcolours.end} - {reason}")
+    print(f"{tcolours.blue}{guitar[0]}{tcolours.end}")
+    print(f"The correct title was {tcolours.green}{chosen_title}{tcolours.end} ")
     print(f"your final score is {tcolours.green}{SCORE}{tcolours.end}\n")
+    update_scores(username, SCORE)
+    play_again()
+    
+    #print(f"\nSorry you're leaving {username}\n")
+    
     #global SCORE
     #global LIVES
-    time.sleep(3)    
+    #time.sleep(3)    
+    #score_board()
+    #print(f"\nEnd Game\n")
+
+def exit():
     score_board()
     print(f"\nEnd Game\n")
+
 
 
 
