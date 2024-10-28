@@ -143,7 +143,7 @@ def load_question(username, scrambled_title, chosen_title, level_choice, guitar)
     """
     clear()
     print(f"\n\nGood Luck {username}, your Scrambled Ed song title is:\n")
-    typewriter_print(scrambled_title, .2)
+    typewriter_print ((f"{tcolours.mag}{scrambled_title}{tcolours.end}"), .2)
     print(f"{tcolours.blue}{(guitar[3])}{tcolours.end}")
     time_up = set_time()
 
@@ -166,7 +166,7 @@ def load_question(username, scrambled_title, chosen_title, level_choice, guitar)
             clear()
             print(f"\n{tcolours.red}Wrong guess, please try again{tcolours.end}\n")
             loose_a_life()
-            print(f"Your chosen song title is: {scrambled_title}\n")        
+            print(f"Your chosen song title is: {tcolours.mag}{scrambled_title}{tcolours.end}\n")        
 
 
 def set_time():
@@ -297,7 +297,7 @@ def score_board():
     scores_data.sort((2, 'des'))
     i = 0
     while i < 5:
-        print(f"\n   {tcolours.mag}{(scores_data.col_values(1)[i])}:  {(scores_data.col_values(2)[i])}{tcolours.end}") 
+        print(f"\n   {tcolours.blue}{(scores_data.col_values(1)[i])}:  {(scores_data.col_values(2)[i])}{tcolours.end}") 
         i +=1
 
 
@@ -325,6 +325,9 @@ def end_game(username, reason, chosen_title):
 
 
 def exit():
+    """
+    Print Game Over banner and load score board
+    """
     clear()
     print(f"\n\n")
     typewriter_print((f"{tcolours.blue}{game_over_banner[0]}{tcolours.end}"), .01)
