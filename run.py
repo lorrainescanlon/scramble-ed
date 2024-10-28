@@ -138,10 +138,8 @@ def load_question(username, scrambled_title, chosen_title, level_choice, guitar)
     """
     loads the scrambled title and prompts the player to enter a guess.
     Calls the timer function to set a timer for the game. 
-    Calls the valiadtion function to validate input.
     Checks answer, if correct increases score and prompts user to play again.
-    If incorrect, reduces lives and updates ascii image. 
-    Prompts the user to try again until lives are 0 are time is up.
+    If incorrect prompts the user to try again until lives are 0 are time is up.
     """
     clear()
     print(f"\n\nGood Luck {username}, your Scrambled Ed song title is:\n")
@@ -151,48 +149,55 @@ def load_question(username, scrambled_title, chosen_title, level_choice, guitar)
 
     global LIVES
 
-    while True:
+
+    while check_lives(username, chosen_title) and check_time(username, time_up, chosen_title):
         guess = input(f"Your Guess here:\n")
         if guess == "quit":
-            print(f"The correct answer was {tcolours.green}{chosen_title}{tcolours.end}\n")
+            reason = "You Quit"
+            end_game(username, reason, chosen_title)
+            #print(f"The correct answer was {tcolours.green}{chosen_title}{tcolours.end}\n")
             break
-        elif check_lives() and check_time(time_up):
-            if guess == chosen_title:   
-                print(f"\n{tcolours.green}Well Done You've guessed it{tcolours.end}\n")
-                increase_score(level_choice)
-                break
-            else:
-                clear()
-                print(f"\n{tcolours.red}Wrong guess, please try again{tcolours.end}\n")
-                loose_a_life()
-                if LIVES > 0:
-                    print(f"Your chosen song title is: {scrambled_title}\n")
-                else:
-                    break           
-
-
-    play_again(username)    
+        elif guess == chosen_title:
+            print(f"\n{tcolours.green}Well Done You've guessed it{tcolours.end}\n")
+            increase_score(level_choice)
+            play_again(username)
+            break
+        else: 
+            clear()
+            print(f"\n{tcolours.red}Wrong guess, please try again{tcolours.end}\n")
+            loose_a_life()
+            print(f"Your chosen song title is: {scrambled_title}\n")        
 
 
 def set_time():
+    """
+    Set time for game to 30 seconds
+    """
     NOW = time.time()
     timer = NOW + 30
     return timer
 
-def check_lives():
+
+def check_lives(username, chosen_title):
+    """
+    Check if user has lives left
+    """
     global LIVES
     reason = "You have run out of Lives"
     if LIVES == 0:
-        end_game(reason)
+        end_game(username, reason, chosen_title)
     else:
         return True
 
 
-def check_time(time_up):
+def check_time(username, time_up, chosen_title):
+    """
+    Check if the time is up
+    """
     time_left = time_up - (time.time())
     reason = "You have run out of time"
     if int(time_left) <= 0:
-        end_game(reason)
+        end_game(username, reason, chosen_title)
     else:
         return True
         
@@ -303,32 +308,28 @@ def reset_lives():
     LIVES = 3
 
 
-def end_game(username, reason):
+def end_game(username, reason, chosen_title):
     """
-    exit game
+    Game over message, displays reason the game ended no lives or no time left
+    Reveals correct answer
+    Displays final score
+    Upates scores sheet
+    Asks the user do they want to play again
     """
     global SCORE
     #print(f"{tcolours.green}{game_over_banner[0]}{tcolours.end}")
+    clear()
     print(f"{tcolours.red}Game Over{tcolours.end} - {reason}")
     print(f"{tcolours.blue}{guitar[0]}{tcolours.end}")
     print(f"The correct title was {tcolours.green}{chosen_title}{tcolours.end} ")
     print(f"your final score is {tcolours.green}{SCORE}{tcolours.end}\n")
     update_scores(username, SCORE)
-    play_again()
-    
-    #print(f"\nSorry you're leaving {username}\n")
-    
-    #global SCORE
-    #global LIVES
-    #time.sleep(3)    
-    #score_board()
-    #print(f"\nEnd Game\n")
+    play_again(username)
+
 
 def exit():
     score_board()
     print(f"\nEnd Game\n")
-
-
 
 
 def play_game(username):
