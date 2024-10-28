@@ -7,7 +7,7 @@
 
 This website was created to demonstrate my ability to develop a command-line  application using Python.
 
-Scramble Ed is an interactive terminal based word guessing game. The user tries to unscramble the Ed Sheeran song title before they run out of time or use up their lives.
+Scramble Ed is an interactive terminal based word guessing game. The user tries to unscramble an Ed Sheeran song title before they run out of time or use up their lives.
 
 ### A live demo of the website can be found [here](https://scramble-ed-298bb66f3eff.herokuapp.com/)
 
@@ -26,11 +26,8 @@ Scramble Ed is an interactive terminal based word guessing game. The user tries 
   - [User Stories](#user-stories)
     - [Strategy](#strategy)
     - [Scope](#scope)
-    - [Structure](#structure)
-    - [Skeleton](#skeleton)
-    - [Surface](#surface)
-  - [Design](#design)
-    - [Planning](#planning)
+  - [Planning](#planning)
+    [Design](#design)
   - [Technologies](#technologies)
   - [Features](#features)
     - [Existing Features](#existing-features)
@@ -48,7 +45,7 @@ Scramble Ed is an interactive terminal based word guessing game. The user tries 
 
 
 ## UX
-This website is aimed at people who have an interest in quizzes pop music. It aims to appeal to people of all ages as users can easily interact with the content and navigation is led by the application.
+This appliaction is aimed at people who have an interest in word games and pop music. It aims to appeal to people of all ages as users can easily interact with the content and navigation is led by the application.
 
 
 
@@ -65,36 +62,27 @@ The goal is to create a fun and engaging word game. The focus is on presenting t
 ### Scope
 To include features that enhance the user experience and provide value to the user. Features such as the ascii art and scoreboard achieve this.
 
-### Structure
-The user is presented with a landing page with an ascii heading 'Scramble Ed' and the rules of the quiz. The landing page allows the user to input a username to start the quiz. 
-The user is then presented 
 
 
-**Website Sections:**
-- **_Home / Landing Page:_** A list of the rules and an input box for the users username.
-- **_Quiz Page:_** A page that displays flags and multiple choice answers to the user.
-- **_Game Over:_** A page that displays the users final score and the top 5 quiz scores.
 
-### Skeleton
+## Planning
+
+## Design
 The website is desinged with a sequential structure which the user can navigate through with ease.
 
-Wireframes were created using Balsamiq software. Frames were drafted for mobile design.
-View the wireframe designs here [Wireframe](docs/wireframes/FlagQuizWireframes.pdf) 
+The user is presented with a landing page with an ascii heading 'Scramble Ed' and the rules of the quiz. The landing page allows the user to input a username to start the quiz. From here the user is taken through the steps in the game with the option to quit at various intervals. 
 
-### Surface
-A uniform design has been used throught with consistent colour schemes and font to provide a seamless user experience.
+The design is limited as the application runs in a console window. 
+- Ascii art has been used to display the game title, scoreboard heading and guitar images. 
+- Different colour text has been used to enhance the user experience.
+- The scrambled word appears to the console using a typewritter effect.
 
-A fun background image is used throughout to help engage the younger user. Bright contrasting colours are used within the content containers and button elements to maintain the fun theme.
-
-Pseudo classes such as hover, active and focus are used to add styling like shadow and colour change to elements when they change states. This adds a layer of interest for the user.
-
-Font used are Raleway sans-serif.
 
 ## Technologies
-- HTML - To create the basic site layout and content.
-- CSS - To add style to features and content.
-- JavaScript - To add functionality to the website.
-- Balsamiq - Used to create the wireframes.
+- Python - To create the application.
+
+
+
 
 ## Features 
 The following features are included on the website.
@@ -181,23 +169,34 @@ The following features are included on the website.
 
 
 ## Deployment
-- The site was deployed to GitHub pages. The steps to deploy are as follows: 
-  - In the GitHub repository, navigate to the Settings tab. 
-  - Under the General menu on the left side find the Code and Automation section and select Pages.
-  - Under the Build and Deployment section to the right find Source, select 'Deploy from a branch' from the dropdown list.
-  - For Branch select 'main' from the dropdown list and click Save.
-  - The link to the deployed website will now be displayed at the top of the page.
-  - The live link can be found here - https://lorrainescanlon.github.io/flag-quiz/
+- The site was deployed to Heroku, the steps used were as follows: 
+  - Create and login to your heroku account. 
+  - On your heroku dashboard, click the new button and 'create new app' from the dropdown menu.
+  - Enter the name of the app 'scramble-ed', select region as 'Europe' and click the 'Create app' button
+  - On the app screen select the 'Settings' tab.
+  - Find the 'Config Vars' section and enter the following: 
+  KEY :Port and VALUE: 8000
+  - Now find the 'Buildpacks' section and add the 'Python' and 'Node.js' buildpacks. They need to be added in order, Python first and the Node.js.
+  - Scroll back to the top of this page and find the Deploy tab. 
+  - On this page find 'Deployment method' and select 'GitHub'.
+  - In the 'Connect to Github' section enter the name of your repository and click 'Connect'.
+  - On the deploy page select your preferred deployment type I choose 'Enable Automatic Deploys'.
+  - The app will be built on your next push to github.
+  - Once created the app appears on your heroku dashboard. 
+  - Click on app and your dashboard and 'Open app' from the app page. 
+  - The app opens in a console loaded in a browser window.
+
+
+
 
 ## Credits 
 The following is a list of resources that were used for this website.
 
 ### Media
-- The flag images used were all taken from Pixabay by user [OpenClipart-Vectors](https://pixabay.com/users/openclipart-vectors-30363/)
-- The Quiz image used was taken from Pixabay [Quiz Image](https://pixabay.com/vectors/quiz-tiles-letters-red-game-test-2058883/)
-- The background image used was taken from Pixabay and is by Checspec [Background Image](https://pixabay.com/illustrations/abc-alphabet-back-to-school-cartoon-5933479/)
+- ASCII art
 
 ### Code
+ - Template used was [Python Essentials Template](https://github.com/Code-Institute-Org/python-essentials-template) provided by the Code Institute
  - I used a Fisher-Yates Sorting Algorithm to shuffle array for round 1, I found the code snippet that I based mine on at the following link.
    https://www.freecodecamp.org/news/how-to-shuffle-an-array-of-items-using-javascript-or-typescript
  - I found the code snippet the following link to pick a random index from shortarray.
