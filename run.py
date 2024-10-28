@@ -171,7 +171,7 @@ def load_question(username, scrambled_title, chosen_title, level_choice, guitar)
 
 def set_time():
     """
-    Set time for game to 30 seconds
+    Set time for game to 20 seconds
     """
     NOW = time.time()
     timer = NOW + 30
