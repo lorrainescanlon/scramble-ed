@@ -58,9 +58,6 @@ def validate_username(name):
 def select_level(username):
     """
     Prompts the user to enter a level of difficulty.
-    1. Consists of 1 word song titles.
-    2. Consists of 2 word song titles.
-    3. Consists of 3 word song titles.
     """
     clear()
     while True:
@@ -305,6 +302,9 @@ def score_board():
 
 
 def reset_lives():
+    """
+    reset LIVES to 3
+    """
     global LIVES
     LIVES = 3
 
@@ -340,6 +340,9 @@ def exit():
 
 
 def play_game(username):
+    """
+    Calls functions needed to play game
+    """
     reset_lives()
     level_choice = select_level(username)
     titles_to_use = load_words(level_choice)

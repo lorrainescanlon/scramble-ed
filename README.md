@@ -148,15 +148,13 @@ The following features are included on the website.
 
 ## Bugs Encountered
 - On earlier tests I noticed that some titles were returned readable after being scrambled. Like bam bam and lego house. I added and if statement to the split and scramble function to return the scrambled title only if it was not equal to the title otherwise run the function again.
-- When adding the ASCII art I ran into some console errors, these seem to resolve once the program has ran through once. They don't show on subsequent runs even though I didnt change anything.
+- When validating the code in the Python Linter I ran into some console errors relating to the use of escape sequence characters in the ascii art I had used. 
+W605 invalid escape sequence '\_' 
+Putting an r before the images solved this problem.
 - The timer function doesn't currently perform how a user might expect. The function is called at various points when the user interacts with the game but does not interrupt play when time runs out. I would need to run the timer function along with other functions simultaneously to achive this. I believe there is a way using threading, unfortunately this was beyond my skills at this time but would be something I would like to implement in the future. 
 
 ### Unfixed Bugs
-- While validating the javascript code with JSHint a message regarding an unused variable was returned. This variable is in 
-  fact a function name [JSHint](docs/jsHint.pdf).
-- While the game works correctly and the code passes through all validators, I get an uncaught TypeError returned when the 
-  game finishes running ![Console Error](docs/images/consoleerror.PNG). 
-
+- 
 
 ## Deployment
 - The site was deployed to Heroku, the steps used were as follows: 
