@@ -296,9 +296,9 @@ def score_board():
     scores_data.sort((2, 'des'))
     i = 0
     while i < 5:
-        print(f"\n")
         print(f"{colr.b}{(scores_data.col_values(1)[i])}:\
           {(scores_data.col_values(2)[i])}{colr.e}")
+        print(f"\n")
         i += 1
 
 
