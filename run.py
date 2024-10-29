@@ -48,6 +48,10 @@ def validate_username(name):
             raise ValueError(
                 "Username exceeds length"
             )
+        elif len(name) == 0:
+            raise ValueError(
+                "Username can not be blank"
+            )
 
     except ValueError as e:
         print(f"\n{colr.r}Invalid data: {e}, please try again.{colr.e}\n")
@@ -63,6 +67,7 @@ def select_level(username):
     while True:
         print(f"\n")
         print(f"{username} please choose a level of difficulty: 1, 2, or 3\n")
+        print("Scores are weighted according to level choice\n")
         print("1 - 1 Word Song Titles\n")
         print("2 - 2 Word Song Titles\n")
         print("3 - 3 + Word Song Titles\n")
@@ -164,7 +169,7 @@ def load_question(username, scrambled_title, chosen_title,
             clear()
             print(f"\n{colr.r}Wrong guess, please try again{colr.e}\n")
             loose_a_life()
-            print(f"Your chosen song title is: {colr.m}{scrambled_title}\
+            print(f"Your chosen song title is: {colr.c}{scrambled_title}\
                 {colr.e}\n")
 
 
@@ -206,7 +211,6 @@ def typewriter_print(title_string, speed):
     gives typewriter effect when printing to the console
     """
     for char in title_string:
-        #time.sleep(speed)
         sys.stdout.write(char)
         sys.stdout.flush()
         time.sleep(speed)
@@ -256,7 +260,7 @@ def loose_a_life():
 def play_again(username):
     """
     Returns the user to the level choice section if yes
-    or the Intro page if no
+    or game over if no
     """
     print("Would you like to play again?")
     while True:
@@ -265,7 +269,6 @@ def play_again(username):
             play_game(username)
             break
         elif play in ("n", "N"):
-            update_scores(username, SCORE)
             exit()
             break
         else:
@@ -274,8 +277,7 @@ def play_again(username):
 
 def update_scores(username, score):
     """
-    Update the SCORE bby increasing it by 1
-    each time this function is called
+   Write username and score to spreadsheet
     """
     global SCORE
     global LIVES
@@ -333,8 +335,8 @@ def exit():
     Print Game Over banner and load score board
     """
     clear()
-    print(f"\n\n")
-    typewriter_print((f"{colr.b}{game_over_banner[0]}{colr.e}"), .01)
+    #print(f"\n\n")
+    typewriter_print((f"{colr.b}{game_over_banner[0]}{colr.e}"), 0.1)
     time.sleep(1)
     score_board()
     print(f"\nEnd Game\n")

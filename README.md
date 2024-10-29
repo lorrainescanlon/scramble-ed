@@ -82,34 +82,36 @@ The design is limited as the application runs in a console window.
 
 ## Technologies
 - Python - To create the application.
-### Google Sheets API
+- Google Cloud - created project and linked it to google drive spreadsheet using API
+- Google sheets - spreadsheet containing song titles, username and score details
 
 ### Libraries
-In order to use 
+In addition to the standard Python libraries I used the following libraries and modules. 
+
+ - gspread : allows us to read and write data to the spreadsheet.
+ - random : a module containing a number of random number generation-related functions
+ - array : allows us to create arrays in python.
+ - time :  allows us to create time related tasks.
+ - sys :  provides access to system-specific parameters and functions.
+ - google.oauth2.service_account : allows access to the google API
+
 
 ## Features 
 The following features are included on the website.
 
 ### Existing Features
 
-- __Home Page__
-  - The home page includes a text heading telling the user that this is a Flag Quiz. 
-  - This section lists the game rules and contains a form where the the user is asked to enter a username of their choice.
-  - The form uses validation, the user must enter a username in order to continue.
-  - When the user clicks the play button, form validation takes place. If the user has entered a username then the quiz page 
-    is loaded otherwise they are prompted to enter a username to continue.
+- __Landing Page__
+  - The landing page includes an ASCII text banner displaying the title 'Scramble Ed'. 
+  - This section lists the game rules and contains and prompts form the user to enter a username of their choice.
+  - The user must enter a username in order to continue.
+  - Validation is used to ensure the username is not blank and does not exceed 12 characters in length.
 
 ![Home Page](docs/images/homepage.jpg)
 
-- __Quiz Page__
-  - The quiz page displays the flag and 4 answer choices to the user. 
-  - It displays a flag number counter.
-  - It also displays the users current score.
-  - When the user selects their answer, a correct answer is indicated by the answer button turning green and 
-    an incorrect answer is indicated by the button turning red.
-  - Once a choice is selected, the flag and answer choices refresh. The flag counter increases and if the user answered correctly their score also increases by 1.
-  - The flag is removed from the array if it is guessed correctly to eliminate repetition. 
-  - The Quit button returns the user to the homepage.
+- __Level Choice__
+  - The user is presented with list of diffculty levels from 1 to 3.
+  
 
 ![Quiz Page](docs/images/quizpage.jpg)
 ![Correct Answer](docs/images/quizpagecorrect.jpg)   
@@ -189,6 +191,7 @@ The following is a list of resources that were used for this website.
 
 ### Media
 - ASCII art by Harry Mason at [ASCII Art Archive](https://www.asciiart.eu/)
+- For creating the flow chart I used
 
 ### Code
  - Template used was [Python Essentials Template](https://github.com/Code-Institute-Org/python-essentials-template) provided by the Code Institute
