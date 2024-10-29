@@ -335,7 +335,7 @@ def exit():
     Print Game Over banner and load score board
     """
     clear()
-    #print(f"\n\n")
+    print(f"\n\n")
     typewriter_print((f"{colr.b}{game_over_banner[0]}{colr.e}"), 0.01)
     time.sleep(1)
     score_board()
