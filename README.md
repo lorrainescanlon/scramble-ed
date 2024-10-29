@@ -36,7 +36,7 @@ Scramble Ed is an interactive terminal based word guessing game. The user tries 
     - [Validator Testing](#validator-testing)
     - [Bugs](#bugs-encountered)
   - [Deployment](#deployment)
-    - [heroku Deployment](#heroku-deployment)
+    - [Heroku Deployment](#heroku-deployment)
     - [Forking and Cloning](#forking-and-cloning)
   - [Credits](#credits)
     - [media](#media)
@@ -47,12 +47,12 @@ Scramble Ed is an interactive terminal based word guessing game. The user tries 
 
 
 ## UX
-This appliaction is aimed at people who have an interest in word games and pop music. It aims to appeal to people of all ages as users can easily interact with the content and navigation is led by the application.
+This appliaction is aimed at people who have an interest in word games and pop music. It aims to appeal to people of all ages as users can easily interact with the content and navigation is largely led by the application.
 
 
 ## User stories
 - As a user I want the purpose of the website to be clear and immediate. This is achieved through the title banner and instructions visible on the landing page.
-- As a user I want the site design to be engaging and fun. I believe this has been achieved with the use of colour and ascii art.
+- As a user I want the application to be engaging and fun. I believe this has been achieved with the use of colour and ascii art.
 - As a user I want to easily navigate between the different areas on the site. Navigation is logical and follows the course of the game.
 - As a user I want to see what I've scored. This is achieved through the use of a score board that loads at the end of the game.
  
@@ -70,7 +70,7 @@ Flowchart Diagram
 Excel spreadsheet on googledrive google API Setup
 
 ## Design
-The website is desinged with a sequential structure which the user can navigate through with ease.
+The application is desinged with a sequential structure which the user can navigate through with ease.
 
 The user is presented with a landing page with an ascii heading 'Scramble Ed' and the rules of the quiz. The landing page allows the user to input a username to start the quiz. From here the user is taken through the steps in the game with the option to quit at various intervals. 
 
@@ -103,7 +103,7 @@ The following features are included on the website.
 
 - __Landing Page__
   - The landing page includes an ASCII text banner displaying the title 'Scramble Ed'. 
-  - This section lists the game rules and contains and prompts form the user to enter a username of their choice.
+  - This section lists the game rules and prompts the user to enter a username of their choice.
   - The user must enter a username in order to continue.
   - Validation is used to ensure the username is not blank and does not exceed 12 characters in length.
 
@@ -111,7 +111,7 @@ The following features are included on the website.
 
 - __Level Choice__
   - The user is presented with list of diffculty levels from 1 to 3.
-  
+
 
 ![Quiz Page](docs/images/quizpage.jpg)
 ![Correct Answer](docs/images/quizpagecorrect.jpg)   
