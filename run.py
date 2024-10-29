@@ -142,7 +142,7 @@ def load_question(username, scrambled_title, chosen_title,
     """
     clear()
     print(f"\n\nGood Luck {username}, your Scrambled Ed song title is:\n")
-    typewriter_print((f"{colr.m}{scrambled_title}{colr.e}"), .2)
+    typewriter_print((f"{colr.c}{scrambled_title}{colr.e}"), .2)
     print(f"{colr.b}{(guitar[3])}{colr.e}")
     time_up = set_time()
 

@@ -36,6 +36,8 @@ Scramble Ed is an interactive terminal based word guessing game. The user tries 
     - [Validator Testing](#validator-testing)
     - [Bugs](#bugs-encountered)
   - [Deployment](#deployment)
+    - [heroku Deployment](#heroku-deployment)
+    - [Forking and Cloning](#forking-and-cloning)
   - [Credits](#credits)
     - [media](#media)
     - [Code](#code)
@@ -46,7 +48,6 @@ Scramble Ed is an interactive terminal based word guessing game. The user tries 
 
 ## UX
 This appliaction is aimed at people who have an interest in word games and pop music. It aims to appeal to people of all ages as users can easily interact with the content and navigation is led by the application.
-
 
 
 ## User stories
@@ -60,13 +61,13 @@ This appliaction is aimed at people who have an interest in word games and pop m
 The goal is to create a fun and engaging word game. The focus is on presenting the content clearly and ensuring that the game is easy to follow. 
 
 ### Scope
-To include features that enhance the user experience and provide value to the user. Features such as the ascii art and scoreboard achieve this.
+To include features that enhance the user experience and provide value to the user. Features such as the ascii art and scoreboard hlep to achieve this.
 
 
 ## Planning
 
 Flowchart Diagram
-Excel spreadsheet on googledrive
+Excel spreadsheet on googledrive google API Setup
 
 ## Design
 The website is desinged with a sequential structure which the user can navigate through with ease.
@@ -81,7 +82,10 @@ The design is limited as the application runs in a console window.
 
 ## Technologies
 - Python - To create the application.
+### Google Sheets API
 
+### Libraries
+In order to use 
 
 ## Features 
 The following features are included on the website.
@@ -128,7 +132,7 @@ The following features are included on the website.
 - This application has been tested on different browsers such as Chrome, Firefox and Microsoft Edge.
 - It has passed lighthouse testing for performance, accessibility, best practices and search engine optimization. 
 
-### User Testing
+### User/ manual Testing
 
 ### Validator Testing 
 - All code has passed through the [Code Institute Python Linter](https://pep8ci.herokuapp.com/)
@@ -146,6 +150,7 @@ E501: line too long. I resolved these by breaking up the lines with \ where appr
 - 
 
 ## Deployment
+### Heroku Deployment
 - The site was deployed to Heroku, the steps used were as follows: 
   - Create and login to your heroku account. 
   - On your heroku dashboard, click the new button and 'create new app' from the dropdown menu.
@@ -163,6 +168,21 @@ E501: line too long. I resolved these by breaking up the lines with \ where appr
   - Click on app and your dashboard and 'Open app' from the app page. 
   - The app opens in a console loaded in a browser window.
 
+### Forking and Cloning
+You can choose to fork or clone your project for development purposes. Forking creates a separate repository that shares code and visibility settings with the original repository. You can make changes to a forked repsotitory without affecting the original repository.
+You can clone your repository to create a local copy on your computer and sync between the two locations. Changes made to a clone repository will affect the original repository.
+
+To Fork
+- Log in to GitHub.
+- Find the repository for your project.
+- Click the Fork button in the top right corner of the screen.
+
+To Clone
+- Log in to GitHub.
+- Find the repository for this project.
+- Click the Code button and select whether you would like to clone with HTTPS, SSH or GitHub CLI. Copy the link displayed.
+- Open the terminal in your code editor and change the current working directory to the location you want to use for the cloned directory.
+- Type 'git clone' into the terminal and then paste the link you copied in the previous steps. 
 
 ## Credits 
 The following is a list of resources that were used for this website.
