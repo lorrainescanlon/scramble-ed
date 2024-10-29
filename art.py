@@ -1,4 +1,4 @@
-from colours import tcolours
+from colours import colr
 game_title_banner = [
 
 """

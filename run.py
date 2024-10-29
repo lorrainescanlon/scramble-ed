@@ -7,7 +7,7 @@ from google.oauth2.service_account import Credentials
 from os import system, name
 from random import shuffle
 from art import game_title_banner, guitar, score_board_banner, game_over_banner
-from colours import tcolours
+from colours import colr
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -22,12 +22,13 @@ SHEET = GSPREAD_CLIENT.open('edsongs')
 SCORE = 0
 LIVES = 3
 
+
 def get_username():
     """
     Display Game title banner
     Get username input from user
     """
-    print(f"{tcolours.green}{game_title_banner[0]}{tcolours.end}")
+    print(f"{colr.g}{game_title_banner[0]}{colr.e}")
     print(f"{game_title_banner[1]}")
 
     while True:
@@ -36,7 +37,6 @@ def get_username():
         if validate_username(username):
             break
     return username
-
 
 
 def validate_username(name):
@@ -50,7 +50,7 @@ def validate_username(name):
             )
 
     except ValueError as e:
-        print(f"\n{tcolours.red}Invalid data: {e}, please try again.{tcolours.end}\n")
+        print(f"\n{colr.r}Invalid data: {e}, please try again.{colr.e}\n")
         return False
     return True
 
@@ -64,7 +64,8 @@ def select_level(username):
     """
     clear()
     while True:
-        print(f"\n{username} please choose a level of difficulty: 1, 2, or 3\n")
+        print(f"\n")
+        print(f"{username} please choose a level of difficulty: 1, 2, or 3\n")
         print("1 - 1 Word Song Titles\n")
         print("2 - 2 Word Song Titles\n")
         print("3 - 3 + Word Song Titles\n")
@@ -74,9 +75,9 @@ def select_level(username):
 
         if validate_choice(level_choice):
             break
-    
+
     return level_choice
-    
+
 
 def validate_choice(choice):
     """
@@ -90,7 +91,7 @@ def validate_choice(choice):
 
     except ValueError as e:
         clear()
-        print(f"\n{tcolours.red}Invalid data: {e}, please try again.{tcolours.end}")
+        print(f"\n{colr.r}Invalid data: {e}, please try again.{colr.e}")
         return False
     return True
 
@@ -134,39 +135,40 @@ def split_and_scramble(title):
         split_and_scramble(title)
 
 
-def load_question(username, scrambled_title, chosen_title, level_choice, guitar):
+def load_question(username, scrambled_title, chosen_title,
+                  level_choice, guitar):
     """
     loads the scrambled title and prompts the player to enter a guess.
-    Calls the timer function to set a timer for the game. 
+    Calls the timer function to set a timer for the game.
     Checks answer, if correct increases score and prompts user to play again.
-    If incorrect prompts the user to try again until lives are 0 are time is up.
+    If incorrect prompts the user to try again until lives are 0 or time is up.
     """
     clear()
     print(f"\n\nGood Luck {username}, your Scrambled Ed song title is:\n")
-    typewriter_print ((f"{tcolours.mag}{scrambled_title}{tcolours.end}"), .2)
-    print(f"{tcolours.blue}{(guitar[3])}{tcolours.end}")
+    typewriter_print((f"{colr.m}{scrambled_title}{colr.e}"), .2)
+    print(f"{colr.b}{(guitar[3])}{colr.e}")
     time_up = set_time()
 
     global LIVES
 
-
-    while check_lives(username, chosen_title) and check_time(username, time_up, chosen_title):
+    while check_lives(username, chosen_title) and \
+            check_time(username, time_up, chosen_title):
         guess = input(f"Your Guess here:\n")
         if guess == "quit":
             reason = "You Quit"
             end_game(username, reason, chosen_title)
-            #print(f"The correct answer was {tcolours.green}{chosen_title}{tcolours.end}\n")
             break
         elif guess == chosen_title:
-            print(f"\n{tcolours.green}Well Done You've guessed it{tcolours.end}\n")
+            print(f"\n{colr.g}Well Done You've guessed it{colr.e}\n")
             increase_score(level_choice)
             play_again(username)
             break
-        else: 
+        else:
             clear()
-            print(f"\n{tcolours.red}Wrong guess, please try again{tcolours.end}\n")
+            print(f"\n{colr.r}Wrong guess, please try again{colr.e}\n")
             loose_a_life()
-            print(f"Your chosen song title is: {tcolours.mag}{scrambled_title}{tcolours.end}\n")        
+            print(f"Your chosen song title is: {colr.m}{scrambled_title}\
+                {colr.e}\n")
 
 
 def set_time():
@@ -200,7 +202,7 @@ def check_time(username, time_up, chosen_title):
         end_game(username, reason, chosen_title)
     else:
         return True
-        
+
 
 def typewriter_print(title_string, speed):
     """
@@ -210,7 +212,7 @@ def typewriter_print(title_string, speed):
         time.sleep(speed)
         sys.stdout.write(char)
         sys.stdout.flush()
-        
+
     print(f"\n")
 
 
@@ -230,11 +232,11 @@ def increase_score(level_choice):
     """
     global SCORE
     if level_choice == "1":
-        SCORE +=1
+        SCORE += 1
     elif level_choice == "2":
-        SCORE +=2
+        SCORE += 2
     elif level_choice == "3":
-        SCORE +=3
+        SCORE += 3
 
 
 def loose_a_life():
@@ -244,14 +246,13 @@ def loose_a_life():
     String guitar
     """
     global LIVES
-    LIVES = LIVES -1
+    LIVES = LIVES - 1
     if LIVES == 1:
         print(f"\nYou have {LIVES} Life left\n")
-        print(f"{tcolours.blue}{guitar[(LIVES)]}{tcolours.end}")
+        print(f"{colr.b}{guitar[(LIVES)]}{colr.e}")
     else:
         print(f"\nYou have {LIVES} Lives left\n")
-        print(f"{tcolours.blue}{guitar[(LIVES)]}{tcolours.end}")
-
+        print(f"{colr.b}{guitar[(LIVES)]}{colr.e}")
 
 
 def play_again(username):
@@ -265,17 +266,17 @@ def play_again(username):
         if play in ("y", "Y"):
             play_game(username)
             break
-        elif play in ("n", "N"):         
+        elif play in ("n", "N"):
             update_scores(username, SCORE)
             exit()
             break
         else:
-            print(f"{tcolours.red}Incorrect input, please try again Y or N{tcolours.end}")
+            print(f"{colr.r}Incorrect input, please try again Y or N{colr.e}")
 
 
 def update_scores(username, score):
     """
-    Update the SCORE bby increasing it by 1 
+    Update the SCORE bby increasing it by 1
     each time this function is called
     """
     global SCORE
@@ -292,13 +293,15 @@ def score_board():
     return top 5 scores from spreadsheet
     """
     clear()
-    print(f"{tcolours.green}{score_board_banner[0]}{tcolours.end}")
+    print(f"{colr.g}{score_board_banner[0]}{colr.e}")
     scores_data = SHEET.worksheet('scores')
     scores_data.sort((2, 'des'))
     i = 0
     while i < 5:
-        print(f"\n   {tcolours.blue}{(scores_data.col_values(1)[i])}:  {(scores_data.col_values(2)[i])}{tcolours.end}") 
-        i +=1
+        print(f"\n")
+        print(f"{colr.b}{(scores_data.col_values(1)[i])}:\
+          {(scores_data.col_values(2)[i])}{colr.e}")
+        i += 1
 
 
 def reset_lives():
@@ -316,10 +319,10 @@ def end_game(username, reason, chosen_title):
     """
     global SCORE
     clear()
-    print(f"{tcolours.red}Game Over{tcolours.end} - {reason}")
-    print(f"{tcolours.blue}{guitar[0]}{tcolours.end}")
-    print(f"The correct title was {tcolours.green}{chosen_title}{tcolours.end} ")
-    print(f"your final score is {tcolours.green}{SCORE}{tcolours.end}\n")
+    print(f"{colr.r}Game Over{colr.e} - {reason}")
+    print(f"{colr.b}{guitar[0]}{colr.e}")
+    print(f"The correct title was {colr.g}{chosen_title}{colr.e} ")
+    print(f"your final score is {colr.g}{SCORE}{colr.e}\n")
     update_scores(username, SCORE)
     play_again(username)
 
@@ -330,8 +333,8 @@ def exit():
     """
     clear()
     print(f"\n\n")
-    typewriter_print((f"{tcolours.blue}{game_over_banner[0]}{tcolours.end}"), .01)
-    time.sleep(.5)
+    typewriter_print((f"{colr.b}{game_over_banner[0]}{colr.e}"), .01)
+    time.sleep(.6)
     score_board()
     print(f"\nEnd Game\n")
 
@@ -342,7 +345,8 @@ def play_game(username):
     titles_to_use = load_words(level_choice)
     chosen_title = random_title(titles_to_use)
     scrambled_title = split_and_scramble(chosen_title)
-    load_question(username, scrambled_title, chosen_title, level_choice, guitar)
+    load_question(username, scrambled_title, chosen_title, level_choice,
+                  guitar)
 
 
 def main():
@@ -351,5 +355,3 @@ def main():
 
 
 main()
-
-
