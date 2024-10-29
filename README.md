@@ -63,10 +63,9 @@ The goal is to create a fun and engaging word game. The focus is on presenting t
 To include features that enhance the user experience and provide value to the user. Features such as the ascii art and scoreboard achieve this.
 
 
-
-
 ## Planning
 
+Flowchart Diagram
 Excel spreadsheet on googledrive
 
 ## Design
@@ -84,10 +83,9 @@ The design is limited as the application runs in a console window.
 - Python - To create the application.
 
 
-
-
 ## Features 
 The following features are included on the website.
+
 ### Existing Features
 
 - __Home Page__
@@ -122,19 +120,15 @@ The following features are included on the website.
 ![Game Over](docs/images/gameover.jpg)    
 
 ### Future Features
-- An additional bonus question to the end of each round with a true or flase question based on the region in particular. A higher score could be awarded for a 
-  correct bonus answer.
-- Display a breakdown of scores by rounds on the game over page to show users what regions they need to improve their knowledge on.
-- Improve the timer function. 
-- Maybe gain extra score points for time left over.
+- Improve the timer function to interrupt the game when the time is up. 
+- Allow users to gain extra score points for time left over.
 
 
 ## Testing
 - This application has been tested on different browsers such as Chrome, Firefox and Microsoft Edge.
-- This page has been tested on laptop and mobile devices.
-- Responsiveness and functionality have been tested on all screen sizes using the dev tools device toolbar.
-- The username input field has been tested successfully. 
-- All pages passed lighthouse testing for performance, accessibility, best practices and search engine optimization. 
+- It has passed lighthouse testing for performance, accessibility, best practices and search engine optimization. 
+
+### User Testing
 
 ### Validator Testing 
 - All code has passed through the [Code Institute Python Linter](https://pep8ci.herokuapp.com/)
