@@ -130,27 +130,22 @@ The following features are included on the website.
 
 
 ## Testing
-- This page has been tested on different browsers such as Chrome, Firefox and Microsoft Edge.
+- This application has been tested on different browsers such as Chrome, Firefox and Microsoft Edge.
 - This page has been tested on laptop and mobile devices.
 - Responsiveness and functionality have been tested on all screen sizes using the dev tools device toolbar.
 - The username input field has been tested successfully. 
 - All pages passed lighthouse testing for performance, accessibility, best practices and search engine optimization. 
 
 ### Validator Testing 
-- HTML
-  - No errors were returned when passing through the official [W3C validation](docs/htmlValidation.pdf)
-- CSS
-  - No errors were found when passing through the official [Jigsaw validation](docs/cssValidation.pdf)
-- JavaScript
-  - One message was returned regarding an unused variable, which is in fact a function name [JSHint](docs/jsHint.pdf)
-- Lighthouse 
-  - Testing was carried out on performance, accessibility and best practices with the attached results [Lighthouse Testing](docs/lighthouse.pdf)
+- All code has passed through the [Code Institute Python Linter](https://pep8ci.herokuapp.com/)
 
 ## Bugs Encountered
 - On earlier tests I noticed that some titles were returned readable after being scrambled. Like bam bam and lego house. I added and if statement to the split and scramble function to return the scrambled title only if it was not equal to the title otherwise run the function again.
 - When validating the code in the Python Linter I ran into some console errors relating to the use of escape sequence characters in the ascii art I had used. 
 W605 invalid escape sequence '\_' 
 Putting an r before the images solved this problem.
+- I also encountered errors where I had exceeded 80 characters per line. 
+E501: line too long. I resolved these by breaking up the lines with \ where appropriate. I also shortened variable names I had given to apply colours as these  were used in a lot of my strings.
 - The timer function doesn't currently perform how a user might expect. The function is called at various points when the user interacts with the game but does not interrupt play when time runs out. I would need to run the timer function along with other functions simultaneously to achive this. I believe there is a way using threading, unfortunately this was beyond my skills at this time but would be something I would like to implement in the future. 
 
 ### Unfixed Bugs
@@ -175,21 +170,19 @@ Putting an r before the images solved this problem.
   - The app opens in a console loaded in a browser window.
 
 
-
 ## Credits 
 The following is a list of resources that were used for this website.
 
 ### Media
-- ASCII art
+- ASCII art by Harry Mason at [ASCII Art Archive](https://www.asciiart.eu/)
 
 ### Code
  - Template used was [Python Essentials Template](https://github.com/Code-Institute-Org/python-essentials-template) provided by the Code Institute
- - ASCII art
- - ASCII colour text
- - Time 
- - Scramble strings in Python
- - Typewritter effect
- - clear function
+ - I used the following discussion to help create my function to scramble the song title strings [Stack Overflow](https://stackoverflow.com/questions/6181304/are-there-any-ways-to-scramble-strings-in-python) 
+ - I used the following article as a basis for my typewritter function. [Python in Plain English](https://python.plainenglish.io-typewriter-animation-using-python-7f4275e812bf)
+ - I used code at the following source to create my clear function. [Geeks for Geeks](https://www.geeksforgeeks.org/clear-screen-python/)
+ - ASCII art by Harry Mason at [ASCII Art Archive](https://www.asciiart.eu/)
+ - I used code found at the following thread to create my colour class [Stack Overflow](https://stackoverflow.com/questions/287871/how-do-i-print-colored-text-to-the-terminal)
 
 
 ### Acknowledgements

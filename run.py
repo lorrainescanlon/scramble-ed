@@ -206,9 +206,10 @@ def typewriter_print(title_string, speed):
     gives typewriter effect when printing to the console
     """
     for char in title_string:
-        time.sleep(speed)
+        #time.sleep(speed)
         sys.stdout.write(char)
         sys.stdout.flush()
+        time.sleep(speed)
 
     print(f"\n")
 
@@ -334,7 +335,7 @@ def exit():
     clear()
     print(f"\n\n")
     typewriter_print((f"{colr.b}{game_over_banner[0]}{colr.e}"), .01)
-    time.sleep(.6)
+    time.sleep(1)
     score_board()
     print(f"\nEnd Game\n")
 
