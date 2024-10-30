@@ -22,17 +22,18 @@ Scramble Ed is an interactive terminal based word guessing game. The user tries 
   - [Demo](#demo)
     - [A live demo website can be found here](#a-live-demo-of-the-website-can-be-found-here)
   - [UX](#ux)
-    - [How to Play](#how-to-play)
   - [User Stories](#user-stories)
-    - [Strategy](#strategy)
-    - [Scope](#scope)
+  - [Strategy](#strategy)
+  - [Scope](#scope)
   - [Planning](#planning)
     [Design](#design)
   - [Technologies](#technologies)
+    - [Libraries](#libraries)
   - [Features](#features)
     - [Existing Features](#existing-features)
     - [Future Features](#future-features) 
   - [Testing](#testing)
+    - [User Testing](#user-testing)
     - [Validator Testing](#validator-testing)
     - [Bugs](#bugs-encountered)
   - [Deployment](#deployment)
@@ -57,10 +58,10 @@ This appliaction is aimed at people who have an interest in word games and pop m
 - As a user I want to see what I've scored. This is achieved through the use of a score board that loads at the end of the game.
  
 
-### Strategy
+## Strategy
 The goal is to create a fun and engaging word game. The focus is on presenting the content clearly and ensuring that the game is easy to follow. 
 
-### Scope
+## Scope
 To include features that enhance the user experience and provide value to the user. Features such as the ascii art and scoreboard help to achieve this.
 
 
@@ -181,8 +182,7 @@ The following features are included.
 
 ![Lighthouse Test](docs/images/lighthouse.jpg)
 
-
-### User/ manual Testing
+### User Testing
 | Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
 | --- | --- | --- | --- | --- |
 | Username Validation | 12 character limit, cannot be blank | Entered blank username | Invalid data: Username can not be blank, please try again | Pass |
@@ -201,6 +201,7 @@ The following features are included.
 ![art.py](docs/images/artpyValidation.jpg)
 ![colours.py](docs/images/coloursValidated.jpg)
 
+
 ## Bugs Encountered
 - On earlier tests I noticed that some titles were returned readable after being scrambled. Like bam bam and lego house. I added and if statement to the split and scramble function to return the scrambled title only if it was not equal to the title otherwise run the function again.
 - When validating the code in the Python Linter I ran into some console errors relating to the use of escape sequence characters in the ascii art I had used. 
@@ -212,6 +213,7 @@ E501: line too long. I resolved these by breaking up the lines with \ where appr
 
 ### Unfixed Bugs
 - None at this time.
+
 
 ## Deployment
 ### Heroku Deployment
@@ -248,9 +250,9 @@ To Clone
 - Open the terminal in your code editor and change the current working directory to the location you want to use for the cloned directory.
 - Type 'git clone' into the terminal and then paste the link you copied in the previous steps. 
 
+
 ## Credits 
 The following is a list of resources that were used for this website.
-
 ### Media
 - ASCII art by Harry Mason at [ASCII Art Archive](https://www.asciiart.eu/)
 - For creating the flow chart I used [Lucid Charts](https://www.lucidchart.com/)
@@ -262,7 +264,6 @@ The following is a list of resources that were used for this website.
  - I used code at the following source to create my clear function. [Geeks for Geeks](https://www.geeksforgeeks.org/clear-screen-python/)
  - ASCII art by Harry Mason at [ASCII Art Archive](https://www.asciiart.eu/)
  - I used code found at the following thread to create my colour class [Stack Overflow](https://stackoverflow.com/questions/287871/how-do-i-print-colored-text-to-the-terminal)
-
 
 ### Acknowledgements
 - I am gratefull to the Code Institute tutor support team for helping and guiding me in the right direction.
