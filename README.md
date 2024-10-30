@@ -11,6 +11,7 @@ Scramble Ed is an interactive terminal based word guessing game. The user tries 
 
 ### A live demo of the website can be found [here](https://scramble-ed-298bb66f3eff.herokuapp.com/)
 
+
 ## Demo
 ![How the website looks on different devices](docs/images/amiresponsive.PNG)
 
@@ -46,7 +47,6 @@ Scramble Ed is an interactive terminal based word guessing game. The user tries 
 
 
 
-
 ## UX
 This appliaction is aimed at people who have an interest in word games and pop music. It aims to appeal to people of all ages as users can easily interact with the content and navigation is largely led by the application.
 
@@ -61,6 +61,7 @@ This appliaction is aimed at people who have an interest in word games and pop m
 ## Strategy
 The goal is to create a fun and engaging word game. The focus is on presenting the content clearly and ensuring that the game is easy to follow. 
 
+
 ## Scope
 To include features that enhance the user experience and provide value to the user. Features such as the ascii art and scoreboard help to achieve this.
 
@@ -69,6 +70,9 @@ To include features that enhance the user experience and provide value to the us
 The following flowchart visualizes the planning phase of this application.
 ![Flowchart Diagram](docs/images/flowchartSE.png)
 
+- Data is read from and written too a spreadsheet on my personal google drive.
+- The ascii art is located in the art.py file for ease of use.
+- The colr class which is used to apply colour to text is located in the colours.py file to keep the run.py for game play functions only.
 
 ## Design
 The application is designed with a sequential structure which the user can navigate through with ease.
@@ -80,6 +84,7 @@ The design is limited as the application runs in a console window.
 - Different colour text has been used to enhance the user experience.
 - The scrambled word appears to the console using a typewritter effect.
 - The game over banner is printed to the console with a quicker typewritter effect.
+
 
 ## Technologies
 - Python - To create the application.
@@ -253,6 +258,7 @@ To Clone
 
 ## Credits 
 The following is a list of resources that were used for this website.
+
 ### Media
 - ASCII art by Harry Mason at [ASCII Art Archive](https://www.asciiart.eu/)
 - For creating the flow chart I used [Lucid Charts](https://www.lucidchart.com/)
