@@ -65,6 +65,7 @@ To include features that enhance the user experience and provide value to the us
 
 
 ## Planning
+The following flowchart visualizes the planning phase of this application.
 ![Flowchart Diagram](docs/images/flowchartSE.png)
 
 
