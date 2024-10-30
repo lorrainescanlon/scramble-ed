@@ -69,7 +69,7 @@ To include features that enhance the user experience and provide value to the us
 
 
 ## Design
-The application is desinged with a sequential structure which the user can navigate through with ease.
+The application is designed with a sequential structure which the user can navigate through with ease.
 
 The user is presented with a landing page with an ascii heading 'Scramble Ed' and the rules of the game. The landing page allows the user to input a username to start the game. From here the user is taken through the steps in the game with the option to quit at various intervals. 
 
@@ -121,7 +121,7 @@ The following features are included.
   - The user is presented with a welcome meassage and the scrambled song title is printed, typewritter style in a cyan text colour.
   - An ascii art piece is printed, this is a guitar missing its strings.
   - The user has 20 seconds and 3 attempts to guess the title. 
-  - The user is prompted to enter a guess
+  - The user is prompted to enter a guess.
 
 ![Game Play](docs/images/game.jpg)
 
@@ -136,7 +136,7 @@ The following features are included.
 - __Incorrect Answer__
   - If the users guess is incorrect they are presented with a message telling them their guess is wrong and to try again.
   - The user loses a life.
-  - The guitar image is updated by adding a string
+  - The guitar image is updated by adding a string.
   - Each life lost adds a string to the guitar.
 
 ![Incorrect Answer](docs/images/incorrect.jpg)
@@ -177,6 +177,7 @@ The following features are included.
 ## Testing
 - This application has been tested on different browsers such as Chrome, Firefox and Microsoft Edge.
 - It has passed lighthouse testing for performance, accessibility, best practices and search engine optimization. 
+
 ![Lighthouse Test](docs/images/lighthouse.jpg)
 
 
@@ -188,15 +189,16 @@ The following features are included.
 | Choice Validation | Options 1, 2 or 3 | Entered 4 | Invalid data: Incorrect level entered, please try again. | Pass |
 | User guess | Guess must match unscrambled title | Entered incorrect guess | Wrong guess please try again. Lives 2. guitar strings 1 | Pass |
 | User guess | Guess must match unscrambled title | Entered second incorrect guess | Wrong guess please try again. Lives 1. guitar strings 2 | Pass | Pass |
-| User Guess | Guess must match unscrambled title | Entered third incorrect guess | Game Over - You have run out of Lives. Guitar strings 3 | Pass |
+| User guess | Guess must match unscrambled title | Entered third incorrect guess | Game Over - You have run out of Lives. Guitar strings 3 | Pass |
 | User guess | Correct guess must be made within 20 seconds | Entered guess after 20 seconds | Game Over - You have run out of time. Guitar strings 3 | Pass |
+| User guess | Guess must match unscrambled title | Entered correct guess | Well Done You've guessed it. Play Again? | Pass |
 | Play Again Y or N | Only accepts y, Y, n or N | Tried different characters | Incorrect input, please try Y or N | Pass |
 
 ### Validator Testing 
 - All code has passed through the [Code Institute Python Linter](https://pep8ci.herokuapp.com/)
-[runpy](docs/images/runpyValidated.jpg)
-[artpy](docs/images/artpyValidation.jpg)
-[colours](docs/images/coloursValidated.jpg)
+![run.py](docs/images/runpyValidated.jpg)
+![art.py](docs/images/artpyValidation.jpg)
+![colours.py](docs/images/coloursValidated.jpg)
 
 ## Bugs Encountered
 - On earlier tests I noticed that some titles were returned readable after being scrambled. Like bam bam and lego house. I added and if statement to the split and scramble function to return the scrambled title only if it was not equal to the title otherwise run the function again.
@@ -208,7 +210,7 @@ E501: line too long. I resolved these by breaking up the lines with \ where appr
 - The timer function doesn't currently perform how a user might expect. The function is called at various points when the user interacts with the game but does not interrupt play when time runs out. I would need to run the timer function along with other functions simultaneously to achive this. I believe there is a way using threading, unfortunately this was beyond my skills at this time but would be something I would like to implement in the future. 
 
 ### Unfixed Bugs
-- 
+- None at this time.
 
 ## Deployment
 ### Heroku Deployment
@@ -250,7 +252,7 @@ The following is a list of resources that were used for this website.
 
 ### Media
 - ASCII art by Harry Mason at [ASCII Art Archive](https://www.asciiart.eu/)
-- For creating the flow chart I used
+- For creating the flow chart I used [Lucid Charts](https://www.lucidchart.com/)
 
 ### Code
  - Template used was [Python Essentials Template](https://github.com/Code-Institute-Org/python-essentials-template) provided by the Code Institute
@@ -263,4 +265,4 @@ The following is a list of resources that were used for this website.
 
 ### Acknowledgements
 - I am gratefull to the Code Institute tutor support team for helping and guiding me in the right direction.
-- A special thanks to my mentor Medale Oluwafemi for his guidance and great advice.
+- A special thanks to my mentor Medale Oluwafemi for his guidance also.
