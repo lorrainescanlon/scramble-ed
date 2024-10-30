@@ -105,7 +105,6 @@ def load_words(choice):
     titles_to_use = []
     songs = SHEET.worksheet('songs')
     titles_to_use = songs.col_values(int(choice))
-    #print(f"{titles_to_use}")
     return titles_to_use
 
 

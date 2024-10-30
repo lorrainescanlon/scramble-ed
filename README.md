@@ -51,7 +51,7 @@ This appliaction is aimed at people who have an interest in word games and pop m
 
 
 ## User stories
-- As a user I want the purpose of the website to be clear and immediate. This is achieved through the title banner and instructions visible on the landing page.
+- As a user I want the purpose of the application to be clear and immediate. This is achieved through the title banner and instructions visible on the landing page.
 - As a user I want the application to be engaging and fun. I believe this has been achieved with the use of colour and ascii art.
 - As a user I want to easily navigate between the different areas on the site. Navigation is logical and follows the course of the game.
 - As a user I want to see what I've scored. This is achieved through the use of a score board that loads at the end of the game.
@@ -61,12 +61,12 @@ This appliaction is aimed at people who have an interest in word games and pop m
 The goal is to create a fun and engaging word game. The focus is on presenting the content clearly and ensuring that the game is easy to follow. 
 
 ### Scope
-To include features that enhance the user experience and provide value to the user. Features such as the ascii art and scoreboard hlep to achieve this.
+To include features that enhance the user experience and provide value to the user. Features such as the ascii art and scoreboard help to achieve this.
 
 
 ## Planning
-Flowchart Diagram
-Excel spreadsheet on googledrive google API Setup
+![Flowchart Diagram](docs/images/flowchartSE.png)
+
 
 ## Design
 The application is desinged with a sequential structure which the user can navigate through with ease.
@@ -77,7 +77,7 @@ The design is limited as the application runs in a console window.
 - Ascii art has been used to display the game title, scoreboard heading and guitar images. 
 - Different colour text has been used to enhance the user experience.
 - The scrambled word appears to the console using a typewritter effect.
-- The game over banner is printed to the console with a quicker typewritter effect
+- The game over banner is printed to the console with a quicker typewritter effect.
 
 ## Technologies
 - Python - To create the application.
@@ -88,15 +88,15 @@ The design is limited as the application runs in a console window.
 In addition to the standard Python libraries I used the following libraries and modules. 
 
  - gspread : allows us to read and write data to the spreadsheet.
- - random : a module containing a number of random number generation-related functions
+ - random : a module containing a number of random number generation-related functions.
  - array : allows us to create arrays in python.
  - time :  allows us to create time related tasks.
  - sys :  provides access to system-specific parameters and functions.
- - google.oauth2.service_account : allows access to the google API
+ - google.oauth2.service_account : allows access to the google API.
 
 
 ## Features 
-The following features are included on the website.
+The following features are included.
 
 ### Existing Features
 
@@ -125,7 +125,7 @@ The following features are included on the website.
 
 ![Game Play](docs/images/game.jpg)
 
--__Correct Answer__
+- __Correct Answer__
   - If the users guess is correct they are presented with a Well done message.
   - The user is presented with the option to play again or not.
   - If they select yes another scrambled title is presented to the user.
@@ -133,27 +133,28 @@ The following features are included on the website.
 
 ![Correct Answer](docs/images/correctanswer.jpg)   
 
--__Incorrect Answer__
-  - If the users guess is incorrect they are presented with a message telling them wrong guess try again.
+- __Incorrect Answer__
+  - If the users guess is incorrect they are presented with a message telling them their guess is wrong and to try again.
   - The user loses a life.
   - The guitar image is updated by adding a string
   - Each life lost adds a string to the guitar.
 
 ![Incorrect Answer](docs/images/incorrect.jpg)
 
--__Out of Time__
-  - If the user fails to guess correctly before the 20 secoonds timer is up they get the game over message.
+- __Out of Time__
+  - If the user fails to guess correctly before the 20 second timer is up they get the game over message.
   - The ascii guitar is printed with all its strings. 
   - Their scores are written to the spreadsheet.
   - The user is asked if they would like to play again.
 
 ![Out of Time](docs/images/outoftime.jpg)
 
--__Out of Lives__
+- __Out of Lives__
   - If the user looses all their lives they are presented with the game over message.
   - The ascii guitar is printed with all its strings. 
   - Their scores are written to the spreadsheet.
   - The user is asked if they would like to play again.
+
   ![Out of Lives](docs/images/nolives.jpg)
 
 - __Game Over__
@@ -162,7 +163,7 @@ The following features are included on the website.
 
 ![Game Over](docs/images/gameover.jpg)
 
--__Score Board__
+- __Score Board__
   - The scoreboard consists of an ascii banner the the top 5 scores from the spreadsheet printed to the console.
 
 ![Score Board](docs/images/scoreboard.jpg)
@@ -176,8 +177,20 @@ The following features are included on the website.
 ## Testing
 - This application has been tested on different browsers such as Chrome, Firefox and Microsoft Edge.
 - It has passed lighthouse testing for performance, accessibility, best practices and search engine optimization. 
+![Lighthouse Test](docs/images/lighthouse.jpg)
+
 
 ### User/ manual Testing
+| Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
+| --- | --- | --- | --- | --- |
+| Username Validation | 12 character limit, cannot be blank | Entered blank username | Invalid data: Username can not be blank, please try again | Pass |
+| Username Validation | 12 character limit, cannot be blank | Entered 13 character username | Invalid data: Username exceeds length, please try again | Pass |
+| Choice Validation | Options 1, 2 or 3 | Entered 4 | Invalid data: Incorrect level entered, please try again. | Pass |
+| User guess | Guess must match unscrambled title | Entered incorrect guess | Wrong guess please try again. Lives 2. guitar strings 1 | Pass |
+| User guess | Guess must match unscrambled title | Entered second incorrect guess | Wrong guess please try again. Lives 1. guitar strings 2 | Pass | Pass |
+| User Guess | Guess must match unscrambled title | Entered third incorrect guess | Game Over - You have run out of Lives. Guitar strings 3 | Pass |
+| User guess | Correct guess must be made within 20 seconds | Entered guess after 20 seconds | Game Over - You have run out of time. Guitar strings 3 | Pass |
+| Play Again Y or N | Only accepts y, Y, n or N | Tried different characters | Incorrect input, please try Y or N | Pass |
 
 ### Validator Testing 
 - All code has passed through the [Code Institute Python Linter](https://pep8ci.herokuapp.com/)
@@ -251,7 +264,3 @@ The following is a list of resources that were used for this website.
 ### Acknowledgements
 - I am gratefull to the Code Institute tutor support team for helping and guiding me in the right direction.
 - A special thanks to my mentor Medale Oluwafemi for his guidance and great advice.
-
-
-
-[def]: 

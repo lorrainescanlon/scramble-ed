@@ -11,7 +11,7 @@ game_title_banner = [
   |                                                              |
   +--------------------------------------------------------------+
 """,
-   """                  Welcome to Scramble Ed!        
+   """                  Welcome to Scramble Ed!
 
 Can you guess the Ed Sheeran song title before Ed tunes his guitar?
 
