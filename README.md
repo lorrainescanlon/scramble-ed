@@ -70,7 +70,7 @@ To include features that enhance the user experience and provide value to the us
 The following flowchart visualizes the planning phase of this application.
 ![Flowchart Diagram](docs/images/flowchartSE.png)
 
-- Data is read from and written too a spreadsheet on my personal google drive.
+- Data is read from and written to a spreadsheet on my personal google drive.
 - The ascii art is located in the art.py file for ease of use.
 - The colr class which is used to apply colour to text is located in the colours.py file to keep the run.py for game play functions only.
 
@@ -198,6 +198,7 @@ The following features are included.
 | User guess | Guess must match unscrambled title | Entered third incorrect guess | Game Over - You have run out of Lives. Guitar strings 3 | Pass |
 | User guess | Correct guess must be made within 20 seconds | Entered guess after 20 seconds | Game Over - You have run out of time. Guitar strings 3 | Pass |
 | User guess | Guess must match unscrambled title | Entered correct guess | Well Done You've guessed it. Play Again? | Pass |
+|User guess | quit to exit| Entered quit | Game Over | Pass |
 | Play Again Y or N | Only accepts y, Y, n or N | Tried different characters | Incorrect input, please try Y or N | Pass |
 
 ### Validator Testing 

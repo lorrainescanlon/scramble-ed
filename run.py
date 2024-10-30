@@ -154,7 +154,7 @@ def load_question(username, scrambled_title, chosen_title,
 
     while check_lives(username, chosen_title) and \
             check_time(username, time_up, chosen_title):
-        guess = input(f"Your Guess here:\n")
+        guess = input(f"Your Guess here, or quit to exit:\n")
         if guess == "quit":
             reason = "You Quit"
             end_game(username, reason, chosen_title)
