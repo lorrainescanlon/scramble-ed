@@ -65,20 +65,19 @@ To include features that enhance the user experience and provide value to the us
 
 
 ## Planning
-
 Flowchart Diagram
 Excel spreadsheet on googledrive google API Setup
 
 ## Design
 The application is desinged with a sequential structure which the user can navigate through with ease.
 
-The user is presented with a landing page with an ascii heading 'Scramble Ed' and the rules of the quiz. The landing page allows the user to input a username to start the quiz. From here the user is taken through the steps in the game with the option to quit at various intervals. 
+The user is presented with a landing page with an ascii heading 'Scramble Ed' and the rules of the game. The landing page allows the user to input a username to start the game. From here the user is taken through the steps in the game with the option to quit at various intervals. 
 
 The design is limited as the application runs in a console window. 
 - Ascii art has been used to display the game title, scoreboard heading and guitar images. 
 - Different colour text has been used to enhance the user experience.
 - The scrambled word appears to the console using a typewritter effect.
-
+- The game over banner is printed to the console with a quicker typewritter effect
 
 ## Technologies
 - Python - To create the application.
@@ -102,32 +101,76 @@ The following features are included on the website.
 ### Existing Features
 
 - __Landing Page__
-  - The landing page includes an ASCII text banner displaying the title 'Scramble Ed'. 
+  - The landing page includes an ascii text banner displaying the title 'Scramble Ed'. 
   - This section lists the game rules and prompts the user to enter a username of their choice.
   - The user must enter a username in order to continue.
   - Validation is used to ensure the username is not blank and does not exceed 12 characters in length.
 
-![Home Page](docs/images/homepage.jpg)
+![Landing Page](docs/images/landing.jpg)
 
 - __Level Choice__
   - The user is presented with list of diffculty levels from 1 to 3.
+  - 1 returns a one word song title.
+  - 2 returns a two word song title.
+  - 3 returns song titles with three or more words.
+  - Input is validated and returns an error if anything other than 1, 2 or 3 is entered.
 
+![Level Choice](docs/images/choice.jpg)
 
-![Quiz Page](docs/images/quizpage.jpg)
-![Correct Answer](docs/images/quizpagecorrect.jpg)   
-![Incorrect Answer](docs/images/quizpageincorrect.jpg)
+- __Game Play__
+  - The user is presented with a welcome meassage and the scrambled song title is printed, typewritter style in a cyan text colour.
+  - An ascii art piece is printed, this is a guitar missing its strings.
+  - The user has 20 seconds and 3 attempts to guess the title. 
+  - The user is prompted to enter a guess
+
+![Game Play](docs/images/game.jpg)
+
+-__Correct Answer__
+  - If the users guess is correct they are presented with a Well done message.
+  - The user is presented with the option to play again or not.
+  - If they select yes another scrambled title is presented to the user.
+  - If they choose no their scores are sent to the spreadsheeet, a game over banner is displayed followed by the scoreboard.
+
+![Correct Answer](docs/images/correctanswer.jpg)   
+
+-__Incorrect Answer__
+  - If the users guess is incorrect they are presented with a message telling them wrong guess try again.
+  - The user loses a life.
+  - The guitar image is updated by adding a string
+  - Each life lost adds a string to the guitar.
+
+![Incorrect Answer](docs/images/incorrect.jpg)
+
+-__Out of Time__
+  - If the user fails to guess correctly before the 20 secoonds timer is up they get the game over message.
+  - The ascii guitar is printed with all its strings. 
+  - Their scores are written to the spreadsheet.
+  - The user is asked if they would like to play again.
+
+![Out of Time](docs/images/outoftime.jpg)
+
+-__Out of Lives__
+  - If the user looses all their lives they are presented with the game over message.
+  - The ascii guitar is printed with all its strings. 
+  - Their scores are written to the spreadsheet.
+  - The user is asked if they would like to play again.
+  ![Out of Lives](docs/images/nolives.jpg)
 
 - __Game Over__
-  - The game over page loads when the answer to the last flag has been selected.
-  - It displays a message telling the user their final score.
-  - A table is also used to display the current top 5 scores.
-  - A play again button allows the user to restart a new game.
+  - The game over ascii banner is printed to the screen using a typewritter effect.
+  - It appears for a short number of seconds before being replaced by the scorebord.
 
-![Game Over](docs/images/gameover.jpg)    
+![Game Over](docs/images/gameover.jpg)
+
+-__Score Board__
+  - The scoreboard consists of an ascii banner the the top 5 scores from the spreadsheet printed to the console.
+
+![Score Board](docs/images/scoreboard.jpg)
 
 ### Future Features
 - Improve the timer function to interrupt the game when the time is up. 
 - Allow users to gain extra score points for time left over.
+- Improve the scoreboard display to include a table.
 
 
 ## Testing
@@ -138,6 +181,9 @@ The following features are included on the website.
 
 ### Validator Testing 
 - All code has passed through the [Code Institute Python Linter](https://pep8ci.herokuapp.com/)
+[runpy](docs/images/runpyValidated.jpg)
+[artpy](docs/images/artpyValidation.jpg)
+[colours](docs/images/coloursValidated.jpg)
 
 ## Bugs Encountered
 - On earlier tests I noticed that some titles were returned readable after being scrambled. Like bam bam and lego house. I added and if statement to the split and scramble function to return the scrambled title only if it was not equal to the title otherwise run the function again.

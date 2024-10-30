@@ -105,7 +105,7 @@ def load_words(choice):
     titles_to_use = []
     songs = SHEET.worksheet('songs')
     titles_to_use = songs.col_values(int(choice))
-    print(f"{titles_to_use}")
+    #print(f"{titles_to_use}")
     return titles_to_use
 
 
@@ -298,7 +298,7 @@ def score_board():
     scores_data.sort((2, 'des'))
     i = 0
     while i < 5:
-        print(f"{colr.b}{(scores_data.col_values(1)[i])}:\
+        print(f" {colr.b}{(scores_data.col_values(1)[i])}:\
           {(scores_data.col_values(2)[i])}{colr.e}")
         print(f"\n")
         i += 1
